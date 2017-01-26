@@ -29,5 +29,9 @@
     <input type=Submit value="Перейти к HelloWorldSession">
 </Form>
 
+<Form action="http://localhost:8080/web1_war_exploded/web_xml_deployment">
+    <input type=Submit value="Перейти к сервлету развернутому через web.xml">
+</Form>
+
 </body>
 </html>
