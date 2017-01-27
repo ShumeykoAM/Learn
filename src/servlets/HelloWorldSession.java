@@ -1,6 +1,6 @@
 // 4)
 
-// Сессии
+// Сессии (так называемый URL RE-writing)
 
 package servlets;
 
@@ -45,3 +45,6 @@ public class HelloWorldSession
   }
 
 }
+
+//Есть еще способ хранить структурированную информацию на клиенте
+//HTML5 supports Web Storage
