@@ -33,5 +33,9 @@
     <input type=Submit value="Перейти к сервлету развернутому через web.xml">
 </Form>
 
+<Form action="http://localhost:8080/web1_war_exploded/JSP_Servlet.jsp">
+    <input type=Submit value="Перейти к странице JSP и реализованным для нее обработчиком в сервлете">
+</Form>
+
 </body>
 </html>
