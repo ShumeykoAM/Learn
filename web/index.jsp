@@ -12,29 +12,8 @@
 </head>
 <body>
 
-<Form action="http://localhost:8080/web1_war_exploded/FindBooks/FindMethodPost" method="post">
-    <input type=Text name="FindText">
-    <input type=Submit value="Найти методом post">
-</Form>
-<Form action="http://localhost:8080/web1_war_exploded/FindBooks/FindMethodGet" method="get">
-    <input type=Text name="FindText">
-    <input type=Submit value="Найти методом get">
-</Form>
-
-<Form action="http://localhost:8080/web1_war_exploded/hw_cookie">
-    <input type=Submit value="Перейти к HelloWorldCookie">
-</Form>
-
-<Form action="http://localhost:8080/web1_war_exploded/hw_session">
-    <input type=Submit value="Перейти к HelloWorldSession">
-</Form>
-
-<Form action="http://localhost:8080/web1_war_exploded/web_xml_deployment">
-    <input type=Submit value="Перейти к сервлету развернутому через web.xml">
-</Form>
-
-<Form action="http://localhost:8080/web1_war_exploded/JSP_Servlet.jsp">
-    <input type=Submit value="Перейти к странице JSP и реализованным для нее обработчиком в сервлете">
+<Form action="http://localhost:8080/web1_war_exploded/struts/Hello.jsp">
+    <input type=Submit value="Перейти к на страницу использующую tld библиотеку">
 </Form>
 
 </body>

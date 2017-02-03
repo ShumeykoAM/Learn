@@ -1,24 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- 6)
-  Добавлена информация о сервлете для разворачивания ее на сервак
--->
 
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
-    <!-- Указываем серверу что класс servlets.XmlDeployment является сервлетой и именуем ее SomeNameServlet -->
-    <servlet>
-        <servlet-name>SomeNameServlet</servlet-name>
-        <servlet-class>servlets.XmlDeployment</servlet-class>
-    </servlet>
 
-    <!-- Для сервлеты именем SomeNameServlet указываем один или несколько URL по которым к ним можно будет перейти -->
-    <servlet-mapping>
-        <servlet-name>SomeNameServlet</servlet-name>
-        <url-pattern>/web_xml_deployment/*</url-pattern>
-        <url-pattern>/deployment_from_xml/*</url-pattern>
-    </servlet-mapping>
+    <jsp-config>
+        <!--Добавим информацию о доступной библиотеке-->
+        <taglib>
+            <taglib-uri>/my_tld</taglib-uri>                              <!--Имя используемое в JSP при импорте-->
+            <taglib-location>/WEB-INF/lib/my_tld.tld</taglib-location>    <!--Физическое положение относительно root директории-->
+        </taglib>
+    </jsp-config>
 
 </web-app>
