@@ -1,4 +1,4 @@
-package struts;
+package tld;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;

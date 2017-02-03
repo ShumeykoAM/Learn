@@ -12,7 +12,7 @@
     <!--описываем тег-->
     <tag>
         <name>no_body</name>                      <!--имя тега которое будет использоваться в JSP-->
-        <tag-class>struts.TagNoBody</tag-class>   <!--Java Bean класс реализующий атрибуты тега-->
+        <tag-class>tld.TagNoBody</tag-class>   <!--Java Bean класс реализующий атрибуты тега-->
         <body-content>JSP</body-content>          <!--JSP-->
         <attribute>                               <!--опишем атрибут тега-->
             <name>propStr</name>                  <!--имя атрибута, которое совпадает с именем свойства в Java Bean классе-->
@@ -25,7 +25,7 @@
     </tag>
     <tag>                                         <!--еще тег-->
         <name>temperature</name>
-        <tag-class>struts.Temperature</tag-class>
+        <tag-class>tld.Temperature</tag-class>
         <body-content>JSP</body-content>
         <attribute>
             <name>to</name>
