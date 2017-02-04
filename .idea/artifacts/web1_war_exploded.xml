@@ -7,6 +7,9 @@
         <element id="directory" name="classes">
           <element id="module-output" name="web1" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="application" name="struts" />
+        </element>
       </element>
     </root>
   </artifact>

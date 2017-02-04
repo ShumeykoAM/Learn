@@ -13,7 +13,11 @@
 <body>
 
 <Form action="http://localhost:8080/web1_war_exploded/tld/Hello.jsp">
-    <input type=Submit value="Перейти к на страницу использующую tld библиотеку">
+    <input type=Submit value="Перейти на страницу использующую tld библиотеку">
+</Form>
+
+<Form action="http://localhost:8080/web1_war_exploded/struts/ActionFormAction.jsp">
+    <input type=Submit value="Перейти на страницу Struts">
 </Form>
 
 </body>
