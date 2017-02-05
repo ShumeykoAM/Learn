@@ -8,10 +8,9 @@ import org.apache.struts.action.ActionMessage;
 
 import javax.servlet.http.HttpServletRequest;
 
-//Контроллер простой валидации
-
+//В парадигме MVC - это контроллер простой валидации
 public class DerivedActionForm
-    extends ActionForm
+    extends ActionForm   //Наследники ActionForm должны описываться по правилам JavaBean
 {
 	public DerivedActionForm()
 	{
@@ -19,6 +18,7 @@ public class DerivedActionForm
 	}
 
 	//Можно переопределить этот метод для первичной (простой) проверки параметров переданных в запросе
+	//  этот метод вызывается struts
 	@Override
 	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request)
 	{
@@ -29,13 +29,6 @@ public class DerivedActionForm
 			actionErrors.add("password", new ActionMessage("reg.error.password.missing"));
 		//Если actionErrors не пуст, то страница будет снова ререрисована, если на ней используются теги <html:errors ...>
 		return actionErrors;  //  то будет отображен текст об ошибке
-	}
-
-	//В этом переопределенном методе можно задавать значения по умолчанию для полей формы
-	@Override
-	public void reset(ActionMapping mapping, HttpServletRequest request)
-	{
-		super.reset(mapping, request);
 	}
 
 	//По правилам Java Beans могут быть описаны геттеры и сеттеры для доступных свойств

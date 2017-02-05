@@ -1,28 +1,40 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts-config PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
         "http://struts.apache.org/dtds/struts-config_1_3.dtd">
 
 <struts-config>
+
+    <!--Перечислим все ActionForm и дадим им псевдонимы, эти псевдонимы будут использоваться дальше по этому файлу-->
     <form-beans>
         <form-bean name="DerivedActionForm"
                    type="struts.DerivedActionForm"/>
-
     </form-beans>
 
+    <!--Связываем ActionForm, Action и JSP-->
     <action-mappings>
         <action path="/struts/MyFirsAction"
                 type="struts.DerivedAction"
                 name="DerivedActionForm"
-                scope="request"
+                scope="session"
                 validate="true"
                 input="/struts/ActionFormAction.jsp">
+            <!--
+                path="/struts/MyFirsAction"              этот путь будет использоваться в JSP "<html:form action="
+                type="struts.DerivedAction"              класс реализующий бизнеслогику, наследник Action
+                name="DerivedActionForm"                 имя JavaBean, определенное выше в блоке <form-beans>
+                scope="request"                          время жизни свойств связанного JavaBean класса
+                validate="true"                          запускать ли ActionForm.validate
+                input="/struts/ActionFormAction.jsp"     страница JSP которая реализует представление ActionForm и Action
+                -->
+            <!--Добавим список доступных страниц на которые можно перейти с этой формы, данные будут лежать в параметре ActionMapping метода Action.execute-->
             <forward name="success"
-                     path="/index.jsp"/>
+                     path="/struts/ActionSuccess.jsp"/>
         </action>
-
     </action-mappings>
 
+    <!--Указываем строковые ресурсы для "<bean:message", new ActionMessage("reg.error.userid.exists") и еще где ни будь
+          это файл .properties лежащий относительно папки web\WEB-INF\classes\-->
     <message-resources parameter="my_first_struts"/>
 </struts-config>
 

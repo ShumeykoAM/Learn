@@ -6,6 +6,7 @@
          version="3.1">
     <display-name>Struts Blank Application</display-name>
 
+    <!--Здесь необходимо описать главный сервлет Struts и другие параметры struts-->
     <!-- Standard Action Servlet Configuration (with debugging) -->
     <servlet>
         <servlet-name>action</servlet-name>
@@ -37,11 +38,14 @@
     </welcome-file-list>
 
     <!-- Struts Tag Library Descriptors -->
+    <!--Как настроить подключение библиотек struts написано тут: https://www.mkyong.com/struts/configure-the-struts-tag-libraries/
+        я выбрал второй вариант, поэтому в этом файле не надо описывать <taglib-uri> Struts библиотек
+    Так же необходимо что бы после разворачивания проекта jarники struts попадали в папку \WEB-INF\lib, настроить артефакт или через Gradle
+    -->
 
 
 
-
-
+    <!-- Далее можно описывать пользовательские библиотеки и сервлеты-->
     <jsp-config>
         <!--Добавим информацию о доступной библиотеке-->
         <taglib>
