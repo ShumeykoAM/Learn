@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration//EN"
+        "http://jakarta.apache.org/struts/dtds/tiles-config.dtd">
+
+<tiles-definitions>
+<!-- ========== LAYOUTS ========== -->
+    <definition name=".simple" path="/struts/tiles/simple-layout.jsp">
+        <put name="header" value="/struts/tiles/header.jsp"/>
+        <put name="footer" value="/struts/tiles/footer.jsp"/>
+    </definition>
+
+
+</tiles-definitions>
