@@ -14,10 +14,10 @@
         <title>Struts страница</title>
     </head>
     <body>
-        <html:form action="/struts/MyFirsAction">      <%--Если DerivedActionForm или DerivedAction заполнили ActionErrors или ActionMessages, то выведется соответствующий текст--%>
+        <html:form action="/struts/MyFirsAction">      
             <bean:message key="reg.message.userid"/>   <%--Подкачаем текст из "web\WEB-INF\classes\my_first_struts.properties"--%>
             <html:text property="userId" size="20" />  <%--Здесь будет обращение к DerivedActionForm.setUserId и DerivedActionForm.getUserId--%>
-            <html:errors property="userID"/>
+            <html:errors property="userID"/>           <%--Если DerivedActionForm или DerivedAction заполнили ActionErrors или ActionMessages, то выведется соответствующий текст--%>
             <p/>
             <bean:message key="reg.message.password"/>      <%--Подкачаем текст из "web\WEB-INF\classes\my_first_struts.properties"--%>
             <html:password property="password" size="20"/>  <%--Здесь будет обращение к DerivedActionForm.setPassword и DerivedActionForm.getPassword--%>
