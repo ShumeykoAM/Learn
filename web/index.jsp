@@ -1,24 +1,15 @@
-<%-- 1)
- При использовании сервера GlassFish может возникнуть проблема развертывания аннотированных сервлетов
- Искать искать ошибки развертывания и другие
-
- --%>
-<%@ page contentType="text/html;charset=UTF-8" %> <!-- что бы кириллица отображалась нормально -->
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Kot
+  Date: 05.02.2017
+  Time: 19:41
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
 <html>
-<head>
-    <title>Мой первый сервлет</title>
-</head>
-<body>
-
-<Form action="http://localhost:8080/web1_war_exploded/tld/Hello.jsp">
-    <input type=Submit value="Перейти на страницу использующую tld библиотеку">
-</Form>
-
-<Form action="http://localhost:8080/web1_war_exploded/struts/ActionFormAction.jsp">
-    <input type=Submit value="Перейти на страницу Struts">
-</Form>
-
-</body>
+    <body>
+        <tiles:insert definition=".myTile"/>
+    </body>
 </html>

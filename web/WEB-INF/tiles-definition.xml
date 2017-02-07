@@ -5,9 +5,10 @@
 
 <tiles-definitions>
 <!-- ========== LAYOUTS ========== -->
-    <definition name=".simple" path="/struts/tiles/simple-layout.jsp">
-        <put name="header" value="/struts/tiles/header.jsp"/>
-        <put name="footer" value="/struts/tiles/footer.jsp"/>
+    <definition name=".myTile"
+                path="/struts/tiles/MyTilesView.jsp"
+                controllerUrl="/MyTilesController.do">
+        <put name="title" value="Заголовок"/>
     </definition>
 
 
