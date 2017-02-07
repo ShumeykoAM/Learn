@@ -25,6 +25,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="GlassFish 4.1.1" level="application_server_libraries" />
-    <orderEntry type="library" name="struts" level="application" />
+    <orderEntry type="library" name="struts" level="project" />
   </component>
 </module>
