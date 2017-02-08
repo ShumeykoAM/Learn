@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://struts.apache.org/tags-tiles" %>
 
+<%--Описываем разметку--%>
 <html>
 <head>
     <title> <tiles:getAsString name="title"/> </title>

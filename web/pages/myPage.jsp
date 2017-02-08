@@ -8,7 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="tiles" uri="http://struts.apache.org/tags-tiles" %>
 
+<%--Используем разметку layouts\simple-layout.jsp--%>
 <tiles:insert page="/layouts/simple-layout.jsp">
+    <%--Задаем элементы разметки--%>
     <tiles:put name="title" value="A simple page" />
     <tiles:put name="header" value="/common/header.jsp" />
     <tiles:put name="footer" value="/common/footer.jsp" />

@@ -15,7 +15,10 @@
 
     </action-mappings>
 
-
+    <!--TODO 1) Прописываем плагин tiles и конфигурационный файл tiles-->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property property="definitions-config" value="/WEB-INF/tiles-definition.xml"/>
+    </plug-in>
 
 </struts-config>
 
