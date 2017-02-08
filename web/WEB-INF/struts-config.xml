@@ -7,15 +7,30 @@
 
     <!--Перечислим все ActionForm и дадим им псевдонимы, эти псевдонимы будут использоваться дальше по этому файлу-->
     <form-beans>
-
+        <form-bean name="LoginBean" type="tiles.LoginBean"/>
+        <form-bean name="Submit" type="tiles.SubmitBean"/>
     </form-beans>
 
     <!--Связываем ActionForm, Action и JSP-->
     <action-mappings>
         <action path="/LoginController"
-                type="tiles.TilesController">
+                type="tiles.TilesController"
+                name="LoginBean">
             <forward name="tiles" path="/pages/tilesPage.jsp"/>
+            <forward name="tilesE" path="/pages/tilesEnother.jsp"/>
         </action>
+        <action path="/Login"
+                type="org.apache.struts.actions.ForwardAction"
+                name="Submit"
+                scope="request"
+                validate="true"
+                parameter="/pages/myPage2.jsp?command=3"/>
+        <action path="/Logout"
+                type="org.apache.struts.actions.ForwardAction"
+                name="Submit"
+                scope="request"
+                validate="true"
+                parameter="/pages/myPage2.jsp?command=5"/>
 
     </action-mappings>
 

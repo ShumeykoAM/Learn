@@ -25,7 +25,12 @@ public class TilesController
                                HttpServletRequest request,
                                HttpServletResponse response) throws Exception
   {
-    return mapping.findForward("tiles");
+    String cmd = request.getParameter("command");
+    LoginBean loginBean = (LoginBean)form;
+    if(cmd!=null && cmd.equals("3"))
+      return mapping.findForward("tilesE");
+    else
+      return mapping.findForward("tiles");
     //return null;
   }
 }

@@ -10,8 +10,8 @@
 <%@ taglib prefix="tiles" uri="http://struts.apache.org/tags-tiles" %>
 <%@ taglib prefix="html" uri="http://struts.apache.org/tags-html-el" %>
 
-<html:form action="/Login">
+<html:form action="/Logout">
     <html:submit>
-        Поехали
+        Приехали
     </html:submit>
 </html:form>
