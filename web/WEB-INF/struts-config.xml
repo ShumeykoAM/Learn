@@ -12,6 +12,10 @@
 
     <!--Связываем ActionForm, Action и JSP-->
     <action-mappings>
+        <action path="/MyTilesController"
+                type="tiles.TilesController">
+            <!--<forward name="success" path="/pages/success.jsp"/>-->
+        </action>
 
     </action-mappings>
 
