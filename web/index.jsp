@@ -10,7 +10,7 @@
 
 <html>
     <body>
-        <Form action="pages/tilesPage.jsp">
+        <Form action="pages/myPage2.jsp">
             <input type=Submit value="Tiles in action">
         </Form>
     </body>

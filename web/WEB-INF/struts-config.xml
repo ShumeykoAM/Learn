@@ -12,9 +12,9 @@
 
     <!--Связываем ActionForm, Action и JSP-->
     <action-mappings>
-        <action path="/MyTilesController"
+        <action path="/LoginController"
                 type="tiles.TilesController">
-            <!--<forward name="success" path="/pages/success.jsp"/>-->
+            <forward name="tiles" path="/pages/tilesPage.jsp"/>
         </action>
 
     </action-mappings>

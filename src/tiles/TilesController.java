@@ -25,7 +25,7 @@ public class TilesController
                                HttpServletRequest request,
                                HttpServletResponse response) throws Exception
   {
-
-    return null;
+    return mapping.findForward("tiles");
+    //return null;
   }
 }

@@ -4,28 +4,15 @@
         "http://jakarta.apache.org/struts/dtds/tiles-config.dtd">
 
 <tiles-definitions xmlns="http://jakarta.apache.org/struts/dtds/tiles-config.dtd">
+
+    <definition name=".login" path="/LoginController.do"/>
+
     <!--Добавляем описание разметки на основе layouts/simple-layout.jsp-->
     <definition name=".simple" path="/layouts/simple-layout.jsp">
-        <!--Задаем элементы разметки, но не все-->
+        <put name="title" value="Титл"/>
         <put name="header" value="/common/header.jsp" />
+        <put name="body" value=".login"/>
         <put name="footer" value="/common/footer.jsp" />
-        <!--Получается что элемент title и body не заданы-->
-    </definition>
-
-    <!--Наследуем описание разметки-->
-    <definition name=".simple.admin" extends=".simple">
-        <!--Переопределяем описание элемента-->
-        <put name="footer" value="/common/footer-admin.jsp" />
-        <!--Задаем элемент разметки-->
-        <put name="body" value="/bodys/mypage-content-admin.jsp" />
-        <!--Получается что, только title не задан-->
-    </definition>
-
-    <definition name=".tilesController"
-                extends=".simple.admin"
-                controllerUrl="/MyTilesController.do">
-        <put name="title" value="Controller"/>
-
     </definition>
 
 </tiles-definitions>
