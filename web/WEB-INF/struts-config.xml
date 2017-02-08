@@ -15,14 +15,7 @@
 
     </action-mappings>
 
-    <!--Указываем строковые ресурсы для "<bean:message", new ActionMessage("reg.error.userid.exists") и еще где ни будь
-          это файл .properties лежащий относительно папки web\WEB-INF\classes\-->
-    <message-resources parameter="resources.my_first_struts"/>
 
-    <!--TODO 1) Прописываем -->
-    <plug-in className="org.apache.struts.tiles.TilesPlugin">
-        <set-property property="definitions-config" value="/WEB-INF/tiles-definition.xml"/>
-    </plug-in>
 
 </struts-config>
 

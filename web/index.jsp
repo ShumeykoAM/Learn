@@ -10,6 +10,8 @@
 
 <html>
     <body>
-        <tiles:insert definition=".myTile"/>
+        <Form action="pages/myPage.jsp">
+            <input type=Submit value="Tiles in action">
+        </Form>
     </body>
 </html>
