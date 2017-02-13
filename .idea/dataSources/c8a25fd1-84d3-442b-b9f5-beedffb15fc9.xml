@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="Sqlite (Xerial) - db_first.db">
+  <database-model serializer="dbm" rdbms="SQLITE" format-version="2.6">
+    <schema id="1">
+      <visible>1</visible>
+    </schema>
+    <table id="2" parent="1" name="table_name"/>
+    <column id="3" parent="2" name="id">
+      <data-type>INT(0,-1)|4</data-type>
+    </column>
+    <key id="4" parent="2">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+  </database-model>
+</dataSource>
