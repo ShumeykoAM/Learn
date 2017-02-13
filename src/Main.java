@@ -29,14 +29,12 @@ public class Main
       Metamodel metamodel = session.getMetamodel();
       Set enSets = metamodel.getEntities();
   
-      /*
       //Создадим POJO сущность
       TableNameEntity townEntity = new TableNameEntity(902);
       //  и сохраним ее в БД
       session.beginTransaction();
       session.save(townEntity);
       session.getTransaction().commit();
-      */
       
       session.beginTransaction();
       //Создаем запрос
