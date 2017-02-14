@@ -10,6 +10,7 @@
         <property name="generate_statistics">false</property>
         <property name="show_sql">true</property><!--Для отладки в оутпут все выводит-->
         <mapping class="entities.TableNameEntity"/>
+        <mapping class="entities.Town"/>
 
     </session-factory>
 </hibernate-configuration>

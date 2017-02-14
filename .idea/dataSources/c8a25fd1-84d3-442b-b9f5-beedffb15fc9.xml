@@ -4,11 +4,34 @@
     <schema id="1">
       <visible>1</visible>
     </schema>
-    <table id="2" parent="1" name="table_name"/>
-    <column id="3" parent="2" name="id">
+    <table id="2" parent="1" name="sqlite_sequence"/>
+    <table id="3" parent="1" name="Town"/>
+    <column id="4" parent="2" name="name">
+      <data-type>(0,-1)|12</data-type>
+    </column>
+    <column id="5" parent="2" name="seq">
+      <data-type>(0,-1)|12</data-type>
+    </column>
+    <column id="6" parent="3" name="id">
+      <data-type>INTEGER(0,-1)|4</data-type>
+    </column>
+    <column id="7" parent="3" name="out_id">
+      <mandatory>1</mandatory>
       <data-type>INT(0,-1)|4</data-type>
     </column>
-    <key id="4" parent="2">
+    <column id="8" parent="3" name="typeCreate">
+      <mandatory>1</mandatory>
+      <data-type>TEXT(0,-1)|12</data-type>
+    </column>
+    <column id="9" parent="3" name="name">
+      <mandatory>1</mandatory>
+      <data-type>TEXT(0,-1)|12</data-type>
+    </column>
+    <column id="10" parent="3" name="birthday">
+      <mandatory>1</mandatory>
+      <data-type>DATE(0,-1)|12</data-type>
+    </column>
+    <key id="11" parent="3">
       <columns>id</columns>
       <primary>1</primary>
     </key>

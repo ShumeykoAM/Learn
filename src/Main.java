@@ -1,4 +1,4 @@
-import entities.TableNameEntity;
+import entities.Town;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -25,32 +25,50 @@ public class Main
     
     try
     {
-      //Можно получить
+      //Можно получить множество возможных сущностей
       Metamodel metamodel = session.getMetamodel();
       Set enSets = metamodel.getEntities();
   
-      //Создадим POJO сущность
-      TableNameEntity townEntity = new TableNameEntity(902);
-      //  и сохраним ее в БД
-      session.beginTransaction();
-      session.save(townEntity);
+      //Создадим POJO сущность и сохраним ее
+      Town town = new Town(67, "COD", "Брянск", "2017-02-24");
+      town.setId(865); //Автоинкрементный не удается сделать, наверное потому что СУБД SQLite
+      session.beginTransaction(); //Все модификации должны происходить в транзакции
+      session.save(town);
+      town = new Town(67, "COD", "Брянск", "2017-02-24");
+      town.setId(34);
+      session.save(town);
       session.getTransaction().commit();
+      int id = town.getId(); //Если бы отработал автоинкремент, то id можно получить так
       
-      session.beginTransaction();
-      //Создаем запрос
-      Query query = session.createQuery("FROM entities.TableNameEntity WHERE id = :id");
-      query.setParameter("id", 78); //Задаем переменные запроса
-      List<TableNameEntity> list1 = query.getResultList(); //Получить список результирующих сущностей
-      //Получить одну сущность, запрос должен возвращать немножесвенный результат
-      TableNameEntity tableNameEntity = (TableNameEntity)query.getSingleResult();
+      //Создаем запрос выборки (работает без транзакции)
+      Query query = session.createQuery("FROM entities.Town WHERE name = :name");
+      query.setParameter("name", "Брянск"); //Задаем переменные запроса
+      query.setMaxResults(1);
+      List<Town> list1 = query.getResultList(); //Получить список результирующих сущностей
+      //Получить одну сущность, запрос НЕ должен возвращать множесвенный результат, иначе exception
+      town = (Town)query.getSingleResult();
       
       //А тут вернем много сущностей
-      query = session.createQuery("FROM entities.TableNameEntity WHERE id != :id");
-      query.setParameter("id", 78);
-      List<TableNameEntity> list2 = query.getResultList();
-      
-      session.getTransaction().commit();
+      query = session.createQuery("FROM entities.Town WHERE name = :name");
+      query.setParameter("name", "Брянск"); //Задаем переменные запроса
+      List<Town> list2 = query.getResultList();
 
+      session.beginTransaction(); //Все модификации должны происходить в транзакции
+      //Изменим запись
+      town.setName("Москва");
+      session.update(town);
+      session.getTransaction().commit();
+  
+      session.beginTransaction(); //Все модификации должны происходить в транзакции
+      //A тут удалим сущность
+      session.delete(town);
+      //  или через запрос, что бы не вынимать сущности
+      query = session.createQuery("delete from entities.Town WHERE id = :id");
+      query.setParameter("id", 865);
+      int count = query.executeUpdate();
+      session.getTransaction().commit();
+      
+      int i = 0;
     }
     catch(Throwable th)
     {
