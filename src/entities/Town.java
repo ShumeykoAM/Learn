@@ -3,10 +3,7 @@ package entities;
 import javax.persistence.*;
 
 /**
- * @author SBT-Shumeyko-AM
- * @ created 13.02.2017
- * @ $Author$
- * @ $Revision$
+ * Этот класс сгенерился через Persistence П.К.М generate persistence mapping/ставим галочку на нужном классе и...
  */
 @Entity
 @Table(name = "Town", schema = "", catalog = "")

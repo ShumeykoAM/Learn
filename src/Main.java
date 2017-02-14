@@ -1,4 +1,5 @@
 import entities.Town;
+import entities.XmlMapping;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -67,6 +68,21 @@ public class Main
       query.setParameter("id", 865);
       int count = query.executeUpdate();
       session.getTransaction().commit();
+      
+      //----------------------------------------------------------------------------
+      //Работаем с POJO сущностью сопределенной черех xml так же как и с сущностью определенной через аннотации
+      //Создадим POJO сущность и сохраним ее
+      XmlMapping xmlMapping = new XmlMapping();
+      xmlMapping.setId(124).setName("Какое то имя");
+      session.beginTransaction(); //Все модификации должны происходить в транзакции
+      session.save(xmlMapping);
+      session.getTransaction().commit();
+  
+      //Создаем запрос выборки (работает без транзакции)
+      query = session.createQuery("FROM entities.XmlMapping WHERE id = :id");
+      query.setParameter("id", 89); //Задаем переменные запроса
+      //Получить одну сущность, запрос НЕ должен возвращать множесвенный результат, иначе exception
+      xmlMapping = (XmlMapping)query.getSingleResult();
       
       int i = 0;
     }
