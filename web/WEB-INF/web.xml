@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <!--Настройки главного сервлета Struts-->
     <servlet>
         <servlet-name>action</servlet-name>
         <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
@@ -17,5 +18,19 @@
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
 
+
+    <!-- Пользовательские сервлеты, аннотации в java коде находятся в меньшем приоритете-->
+
+    <!-- Указываем серверу что класс servlets.XmlDeployment является сервлетой и именуем ее SomeNameServlet -->
+    <servlet>
+        <servlet-name>MyServlet</servlet-name>
+        <servlet-class>servlets.MySimpleServlet</servlet-class>
+    </servlet>
+    <!-- Для сервлеты именем SomeNameServlet указываем один или несколько URL по которым к ним можно будет перейти -->
+    <servlet-mapping>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/my_servlet/web_xml/*</url-pattern>
+        <url-pattern>/my_servlet/annotation/*</url-pattern><!--продублируем путь указанный в аннотации-->
+    </servlet-mapping>
 
 </web-app>
