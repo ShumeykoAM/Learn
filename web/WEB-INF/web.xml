@@ -18,4 +18,14 @@
     </servlet-mapping>
 
 
+
+    <!--Конфигурация JSP-->
+    <jsp-config>
+        <!--Добавим описание пользовательской tld библиотеки-->
+        <taglib>
+            <taglib-uri>/tags/my_tags_lib</taglib-uri>                      <!--Имя используемое в JSP при импорте-->
+            <taglib-location>/WEB-INF/tld/my_tags_lib.tld</taglib-location> <!--Физическое положение относительно root директории-->
+        </taglib>
+    </jsp-config>
+
 </web-app>
