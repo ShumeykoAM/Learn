@@ -11,6 +11,8 @@
       <root url="jar://$PROJECT_DIR$/lib/struts/commons-logging.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/struts/commons-validator.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/struts/oro.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/struts/struts-taglib.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/struts/struts-tiles.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
