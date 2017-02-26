@@ -24,5 +24,7 @@
         Температура в цельсиях 36.6 =
         <my_tags_lib:convert_c_to to="F">36.6</my_tags_lib:convert_c_to> по Фаренгейту и
         <my_tags_lib:convert_c_to to="K">36.6</my_tags_lib:convert_c_to> по Кельвину
+        <br/>
+        <a href="jsp/registration.jsp">Регистрация</a>
     </body>
 </html>
