@@ -1,0 +1,4 @@
+//Комментарий
+task helloWorld << {
+println 'Hello men'
+}
