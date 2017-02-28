@@ -1,4 +1,7 @@
-//Комментарий
-task helloWorld << {
-println 'Hello men'
+//Пример зависимости task "world" от другого task "hello"
+task hello << {
+print 'hello, '
+}
+task world(dependsOn: hello) << {
+println 'world'
 }
