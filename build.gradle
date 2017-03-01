@@ -1,56 +1,8 @@
+//Каждая задача гредла - может наследоваться от классов
 
-//Можно добавлять зависимости тасков, сначала вызовутся таски от которых зависит текущий таск
-//  Таски будут вызываться только один раз, не зависимо от того сколько тасков от него зависят
-
-//Есть различные способы добавления зависимостей, везде используется ключевое слово dependsOn 
-
-//Независимый таск
-task prepareEnvironment{
-    //Это тело конфигурации таска, (аналог в java это поля класса) сначала запускается конфигурация таска
-    //  конфигурирование запускается для всех тасков, не зависимо от того какой таск запускается на исполнение
-    println 'work configuration block in prepareEnvironment'
-    
-    //Аддитивный метод с действиями, которые добавятся в начало перед всеми существующими действиями
-    doFirst{
-        println 'doFirst_prepareEnvironment'
-    }
-    //Аддитивный обозначает что методы doFirst можно добавлять к существующим
-    doFirst{
-        println 'add doFirst_prepareEnvironment'
-    }
-
-    //Аддитивный метод с действиями, которые добавятся в конец после всех существующих действий
-    doLast{
-        println 'doLast_prepareEnvironment'
-    }
-}
-
-//Можно и так добависть к таску еще действия
-prepareEnvironment.doLast{
-    println 'add doLast_prepareEnvironment'
-}
-
-
-//Зависимый таск от одного таска
-task prepareDataBase(dependsOn: prepareEnvironment){
-    //Тело конфигурации таска
-    println 'work configuration block in prepareDataBase'
-    
-    doLast{        
-        println 'prepareDataBase'
-    }
-}
-//Добавляем условие, если оно истинно, то таск выполнится, иначе не выполнится
-prepareDataBase.onlyIf{
-    System.properties['load.data'] == 'true'
-}
-
-//Зависимый таск от нескольких тасков
-task runTests(dependsOn: [prepareEnvironment, prepareDataBase]){
-    //Тело конфигурации таска
-    println 'work configuration block in runTests'
-
-    doLast{
-        println 'runTests'
-    }
+//Отнаследуемся от класса Copy и обращаемся к методам базового класса
+task copyFiles(type: Copy) {
+    from 'resources'
+    into 'target'
+    include ('**/*.xml', '**/*.txt', '**/*.properties')
 }
