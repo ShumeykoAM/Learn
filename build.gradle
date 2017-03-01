@@ -1,25 +1,17 @@
-//оператор << назначает или добавляет таску действие сборки
-//Объявляем таск и назначаем таску действие 
-task good_bye<<{
-    println 'good bye'
+apply plugin: 'java'
+
+
+//Наследуемся от класса JavaExec, (пускалка java кода)
+task runApp(type: JavaExec) {
+    //Путь к корневому пакету
+    classpath = sourceSets.main.runtimeClasspath
+    //Можно посмотреть пути которые находятся в classpath
+    doLast{
+        println classpath.getAsPath()
+    }
+    //Класс с методом main
+    main = 'org.gradle.example.simple.HelloWorld'
+    //Аргументы запуска
+    args 'hello gradle'
+    
 }
-
-//Объявляем task
-task hello
-//Назначаем таску действие
-hello << {
-print 'hello, '
-}
-//Назначаем таску еще одно действие (добавляем, выполнятся оба)
-hello << {
-println 'world'
-}
-
-//Без оператора << - это блок конфигурации задачи, он всегда выполняется до выполнения назначенных действий
-hello { println 'configuring block task' }
-
-//Каждый раз, когда Gradle выполняет сборку, она проходит через три фазы жизненного цикла
-//      инициализация, конфигурация и выполнение.
-
-//Добавим еще один блок конфигурации задачи (выполнятся оба)
-hello { println 'yet configuring block task' }
