@@ -10,10 +10,24 @@ task prepareEnvironment{
     //  конфигурирование запускается для всех тасков, не зависимо от того какой таск запускается на исполнение
     println 'work configuration block in prepareEnvironment'
     
-    //
-    doLast{
-        println 'prepareEnvironment'
+    //Аддитивный метод с действиями, которые добавятся в начало перед всеми существующими действиями
+    doFirst{
+        println 'doFirst_prepareEnvironment'
     }
+    //Аддитивный обозначает что методы doFirst можно добавлять к существующим
+    doFirst{
+        println 'add doFirst_prepareEnvironment'
+    }
+
+    //Аддитивный метод с действиями, которые добавятся в конец после всех существующих действий
+    doLast{
+        println 'doLast_prepareEnvironment'
+    }
+}
+
+//Можно и так добависть к таску еще действия
+prepareEnvironment.doLast{
+    println 'add doLast_prepareEnvironment'
 }
 
 
