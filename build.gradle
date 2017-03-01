@@ -1,25 +1,38 @@
-//оператор << назначает или добавляет таску действие сборки
-//Объявляем таск и назначаем таску действие 
-task good_bye<<{
-    println 'good bye'
+
+//Можно добавлять зависимости тасков, сначала вызовутся таски от которых зависит текущий таск
+//  Таски будут вызываться только один раз, не зависимо от того сколько тасков от него зависят
+
+//Есть различные способы добавления зависимостей, везде используется ключевое слово dependsOn 
+
+//Независимый таск
+task prepareEnvironment{
+    //Это тело конфигурации таска, (аналог в java это поля класса) сначала запускается конфигурация таска
+    //  конфигурирование запускается для всех тасков, не зависимо от того какой таск запускается на исполнение
+    println 'work configuration block in prepareEnvironment'
+    
+    //
+    doLast{
+        println 'prepareEnvironment'
+    }
 }
 
-//Объявляем task
-task hello
-//Назначаем таску действие
-hello << {
-print 'hello, '
+
+//Зависимый таск от одного таска
+task prepareDataBase(dependsOn: prepareEnvironment){
+    //Тело конфигурации таска
+    println 'work configuration block in prepareDataBase'
+    
+    doLast{        
+        println 'prepareDataBase'
+    }
 }
-//Назначаем таску еще одно действие (добавляем, выполнятся оба)
-hello << {
-println 'world'
+
+//Зависимый таск от нескольких тасков
+task runTests(dependsOn: [prepareEnvironment, prepareDataBase]){
+    //Тело конфигурации таска
+    println 'work configuration block in runTests'
+
+    doLast{
+        println 'runTests'
+    }
 }
-
-//Без оператора << - это блок конфигурации задачи, он всегда выполняется до выполнения назначенных действий
-hello { println 'configuring block task' }
-
-//Каждый раз, когда Gradle выполняет сборку, она проходит через три фазы жизненного цикла
-//      инициализация, конфигурация и выполнение.
-
-//Добавим еще один блок конфигурации задачи (выполнятся оба)
-hello { println 'yet configuring block task' }
