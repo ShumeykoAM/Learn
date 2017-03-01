@@ -40,6 +40,10 @@ task prepareDataBase(dependsOn: prepareEnvironment){
         println 'prepareDataBase'
     }
 }
+//Добавляем условие, если оно истинно, то таск выполнится, иначе не выполнится
+prepareDataBase.onlyIf{
+    System.properties['load.data'] == 'true'
+}
 
 //Зависимый таск от нескольких тасков
 task runTests(dependsOn: [prepareEnvironment, prepareDataBase]){

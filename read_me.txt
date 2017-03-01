@@ -1,4 +1,6 @@
 собрать
-    gradle build
-проверить
-    java -cp build/classes/main/ org.gradle.example.simple.HelloWorld
+    gradle -Dload.data=true -q runTests
+и просто
+    gradle -q runTests
+
+В результате должна быть(не быть) выполнена задача prepareDataBase
