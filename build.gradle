@@ -1,55 +1,19 @@
-apply plugin: 'java'
-//Все таски это объекты класса DefaultTask (по умолчанию) или объекты класса который наследуются от класса DefaultTask и его потомков
 
 //Пример: явно укажем, что тип объекта таска есть DefaultTask
+
 task simpleTask(type: DefaultTask){
-    doLast{
-        println("I am DefaultTask")
-        println(simpleTask.class.toString()) //Отобразим тип таска (возможно будет суффикс _Decorated)
-    }
-}
-
-//Для гредла можно написать плагины на java, подобные      apply plugin: 'java'
-//  у плагинов может быть несколько тасков, которые можно сразуже запускать и классов тасков
-//  на основе которых можно делать свои задачи и запускать их, или наследоваться от этих классов и делать свои задачи и т.д.
-
-
-//Можно создавать пользовательские классы тасков и объекты этих пользовательских классов
-//Для того что бы создать свой тип таска надо:
-// 1) Class MyTypeTask extends DefaultTask (или extends другой более подходящий таск)
-// 2) Прописать метод @TaskAction
-// 3) Добавить его в DSL (пока не понятно что это)
-
-class TypeTaskWithProps extends DefaultTask {
-    //Объявляем переменную
-    def translate = false
+    //Создаем объект класса FileTree
+    FileTree dirs = fileTree (dir: "src/main")
+    //или так
+    //def dirs = fileTree (dir: "src/main")
     
-    //Определяем функцию которая исполнится при выполнении таска данного типа
-    @TaskAction
-    def runQuery() {
-        //Объявляем переменную
-        def cmd
-        if(translate) {
-            cmd = "chrome https://translate.google.com/?hl=ru"
-        }
-        else {
-            cmd = "chrome  https://ankiweb.net/decks/"
-        }
-        //Исполняем командную строку
-        project.exec {
-            commandLine = cmd.split().toList()
-        }
-    }
-}
-
-//Создаем объект своего таска
-task myTask(type: TypeTaskWithProps, dependsOn: simpleTask){ //Для примера укажем зависимость от другого таска
-    //Изменим поле
-    translate = true
     doLast{
-        println(myTask.class.toString()) //Отобразим тип таска (возможно будет суффикс _Decorated)
+        //Перебираем все элементы коллекции, в переменную fd попадают все элементы дерева папок и файлов
+        dirs.visit { FileVisitDetails fd ->
+            if (fd.isDirectory || !fd.directory){ //если очередной элемент папка или не папка
+                println "-- ${fd.name}"           //  то выводим его на экран
+            }
+        }
     }
 }
 
-
-//Пример создания пользовательского плагина можно глянуть тут https://www.youtube.com/watch?v=NZJTYPLb0iE в райноне 44 минуты
