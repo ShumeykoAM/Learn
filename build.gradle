@@ -1,9 +1,55 @@
-//У гредла записана структура проекта по умолчанию (корневой пакет java начинается src\main\java и т.д.)
-
 apply plugin: 'java'
+//Все таски это объекты класса DefaultTask (по умолчанию) или объекты класса который наследуются от класса DefaultTask и его потомков
 
-//Зависимости, зависимости задаются для конфигураций, у гредла по умолчанию несколько конфигураций
-dependencies{
-    //Для конфигурации testCompile  мы указываем зависимость, для импорта org.junit
-    testCompile fileTree(dir: 'src/main/library', include: '*.jar')
+//Пример: явно укажем, что тип объекта таска есть DefaultTask
+task simpleTask(type: DefaultTask){
+    doLast{
+        println("I am DefaultTask")
+        println(simpleTask.class.toString()) //Отобразим тип таска (возможно будет суффикс _Decorated)
+    }
 }
+
+//Для гредла можно написать плагины на java, подобные      apply plugin: 'java'
+//  у плагинов может быть несколько тасков, которые можно сразуже запускать и классов тасков
+//  на основе которых можно делать свои задачи и запускать их, или наследоваться от этих классов и делать свои задачи и т.д.
+
+
+//Можно создавать пользовательские классы тасков и объекты этих пользовательских классов
+//Для того что бы создать свой тип таска надо:
+// 1) Class MyTypeTask extends DefaultTask (или extends другой более подходящий таск)
+// 2) Прописать метод @TaskAction
+// 3) Добавить его в DSL (пока не понятно что это)
+
+class TypeTaskWithProps extends DefaultTask {
+    //Объявляем переменную
+    def translate = false
+    
+    //Определяем функцию которая исполнится при выполнении таска данного типа
+    @TaskAction
+    def runQuery() {
+        //Объявляем переменную
+        def cmd
+        if(translate) {
+            cmd = "chrome https://translate.google.com/?hl=ru"
+        }
+        else {
+            cmd = "chrome  https://ankiweb.net/decks/"
+        }
+        //Исполняем командную строку
+        project.exec {
+            commandLine = cmd.split().toList()
+        }
+    }
+}
+
+//Создаем объект своего таска
+task myTask(type: TypeTaskWithProps, dependsOn: simpleTask){ //Для примера укажем зависимость от другого таска
+    //Изменим поле
+    translate = true
+    doLast{
+        println(myTask.class.toString()) //Отобразим тип таска (возможно будет суффикс _Decorated)
+    }
+}
+
+
+//Пример создания пользовательского плагина можно глянуть тут https://www.youtube.com/watch?v=NZJTYPLb0iE в райноне 44 минуты
