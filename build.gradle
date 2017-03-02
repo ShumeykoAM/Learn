@@ -1,18 +1,26 @@
+apply plugin: 'java'
 
 //Пример перебора коллекций с помощью лямда выражений
-//  выводим дерево файлов
 task simpleTask{
     doLast{
-        //Создаем объект File и вызываем его метод eachFileRecurse, который принимает в параметре Closure,
-        //    Closure - что то типа лямбда выражения? по этому после eachFileRecurse идет { тело лямбды }, при этом в ьеле доступен it
-        new File("src/main").eachFileRecurse {
+        // есть переменная sourceSets.main.runtimeClasspath.each, она есть коллекция,
+        //    можно вызвать метод each принимающий в параметре лямбда функцию
+        sourceSets.main.runtimeClasspath.each {
             println it
         }
         println ''
-        //Можно самому придумать имя переменной
-        new File("src/main").eachFileRecurse { java.io.File nextFile ->
-            println nextFile
+
+        //Или можно объявить переменную для каждого объекта коллекции
+        sourceSets.main.runtimeClasspath.each { path ->
+            println path
         }
+        println ''
+
+        //Можно еще и тип указать для имени переменной каждого объекта коллекции
+        sourceSets.main.runtimeClasspath.each {File path ->
+            println path
+        }
+
     }
 }
 
