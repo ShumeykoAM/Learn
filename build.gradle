@@ -1,17 +1,9 @@
+//У гредла записана структура проекта по умолчанию (корневой пакет java начинается src\main\java и т.д.)
+
 apply plugin: 'java'
 
-
-//Наследуемся от класса JavaExec, (пускалка java кода)
-task runApp(type: JavaExec) {
-    //Путь к корневому пакету
-    classpath = sourceSets.main.runtimeClasspath
-    //Можно посмотреть пути которые находятся в classpath
-    doLast{
-        println classpath.getAsPath()
-    }
-    //Класс с методом main
-    main = 'org.gradle.example.simple.HelloWorld'
-    //Аргументы запуска
-    args 'hello gradle'
-    
+//Зависимости, зависимости задаются для конфигураций, у гредла по умолчанию несколько конфигураций
+dependencies{
+    //Для конфигурации testCompile  мы указываем зависимость, для импорта org.junit
+    testCompile fileTree(dir: 'src/main/library', include: '*.jar')
 }
