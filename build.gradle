@@ -1,18 +1,17 @@
 
-//Пример: явно укажем, что тип объекта таска есть DefaultTask
-
-task simpleTask(type: DefaultTask){
-    //Создаем объект класса FileTree
-    FileTree dirs = fileTree (dir: "src/main")
-    //или так
-    //def dirs = fileTree (dir: "src/main")
-    
+//Пример перебора коллекций с помощью лямда выражений
+//  выводим дерево файлов
+task simpleTask{
     doLast{
-        //Перебираем все элементы коллекции, в переменную fd попадают все элементы дерева папок и файлов
-        dirs.visit { FileVisitDetails fd ->
-            if (fd.isDirectory || !fd.directory){ //если очередной элемент папка или не папка
-                println "-- ${fd.name}"           //  то выводим его на экран
-            }
+        //Создаем объект File и вызываем его метод eachFileRecurse, который принимает в параметре Closure,
+        //    Closure - что то типа лямбда выражения? по этому после eachFileRecurse идет { тело лямбды }, при этом в ьеле доступен it
+        new File("src/main").eachFileRecurse {
+            println it
+        }
+        println ''
+        //Можно самому придумать имя переменной
+        new File("src/main").eachFileRecurse { java.io.File nextFile ->
+            println nextFile
         }
     }
 }
