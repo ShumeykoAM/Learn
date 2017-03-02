@@ -1,8 +1,17 @@
-//Каждая задача гредла - может наследоваться от классов
+apply plugin: 'java'
 
-//Отнаследуемся от класса Copy и обращаемся к методам базового класса
-task copyFiles(type: Copy) {
-    from 'resources'
-    into 'target'
-    include ('**/*.xml', '**/*.txt', '**/*.properties')
+
+//Наследуемся от класса JavaExec, (пускалка java кода)
+task runApp(type: JavaExec) {
+    //Путь к корневому пакету
+    classpath = sourceSets.main.runtimeClasspath
+    //Можно посмотреть пути которые находятся в classpath
+    doLast{
+        println classpath.getAsPath()
+    }
+    //Класс с методом main
+    main = 'org.gradle.example.simple.HelloWorld'
+    //Аргументы запуска
+    args 'hello gradle'
+    
 }
