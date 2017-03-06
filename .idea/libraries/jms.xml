@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jms">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../glassfish4/mq/lib/imq.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../glassfish4/mq/lib/jms.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
