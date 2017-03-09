@@ -6,5 +6,8 @@
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <auth-required>false</auth-required>
     </data-source>
+    <data-source name="db_first.db" uuid="5b2de05b-9bab-4332-b59c-6f8343c8f9c7">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+    </data-source>
   </component>
 </project>
