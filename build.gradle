@@ -1,26 +1,8 @@
+//apply plugin: 'idea'
 apply plugin: 'java'
 
-//Пример перебора коллекций с помощью лямда выражений
-task simpleTask{
-    doLast{
-        // есть переменная sourceSets.main.runtimeClasspath.each, она есть коллекция,
-        //    можно вызвать метод each принимающий в параметре лямбда функцию
-        sourceSets.main.runtimeClasspath.each {
-            println it
-        }
-        println ''
-
-        //Или можно объявить переменную для каждого объекта коллекции
-        sourceSets.main.runtimeClasspath.each { path ->
-            println path
-        }
-        println ''
-
-        //Можно еще и тип указать для имени переменной каждого объекта коллекции
-        sourceSets.main.runtimeClasspath.each {File path ->
-            println path
-        }
-
-    }
+//Зависимости, зависимости задаются для конфигураций, у гредла по умолчанию несколько конфигураций
+dependencies{
+    //Для конфигурации testCompile  мы указываем зависимость, для импорта org.junit
+    testCompile fileTree(dir: 'src/test/library', include: '*.jar')
 }
-
