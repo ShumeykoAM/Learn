@@ -14,3 +14,26 @@ dependencies{
     compile fileTree(dir:'src/main/library')
 
 }
+
+test.doFirst{
+    copy {
+        from ('src/test/resources/META-INF/beans.xml')
+        into ('build/classes/test/META-INF')
+    }
+    copy {
+        //Походу дела какой то косяк в Weld или во мне, но Weld всегда использует файл из main/META-INF
+        from ('src/test/resources/META-INF/beans.xml')
+        into ('build/classes/main/META-INF')
+    }
+
+}
+
+//Скопируем файлы ресурсов что бы WeldContainer работал
+build.doLast{
+    //if (tasks.compileJava.didWork) {
+        copy {
+            from ('src/main/resources/META-INF/beans.xml')
+            into ('build/classes/main/META-INF')
+        }          
+    //}
+}
