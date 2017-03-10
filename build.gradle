@@ -1,8 +1,17 @@
 //apply plugin: 'idea'
 apply plugin: 'java'
 
+//repositories {
+//    mavenCentral() //Не работает из за какой то лицензии, надо разобраться
+//}
+
 //Зависимости, зависимости задаются для конфигураций, у гредла по умолчанию несколько конфигураций
 dependencies{
     //Для конфигурации testCompile  мы указываем зависимость, для импорта org.junit
     testCompile fileTree(dir: 'src/test/library', include: '*.jar')
+
+    // https://mvnrepository.com/artifact/javax.validation/validation-api
+    //compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Alpha1'
+    compile fileTree(dir:' main/library')
+
 }

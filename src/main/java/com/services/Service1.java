@@ -1,5 +1,8 @@
 package com.services;
 
+
+import javax.validation.constraints.*;
+
 /**
  * @author sbt-shumeyko-am
  * @ created 09.03.2017
@@ -17,7 +20,7 @@ public class Service1
     {
         return i;
     }
-    protected int serviceMethod_protected(int i)
+    protected int serviceMethod_protected(@NotNull int i)
     {
         return i;
     }
@@ -27,4 +30,8 @@ public class Service1
         return i;
     }
     
+    public void f(@NotNull Long l)
+    {
+        
+    }
 }
