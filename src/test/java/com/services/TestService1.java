@@ -1,7 +1,6 @@
 package com.services;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.*;
 
 import java.lang.reflect.Method;
 
@@ -13,12 +12,13 @@ import java.lang.reflect.Method;
 *   private методы через рефлексию
 */
 
+//@Ignore("Sometimes you want temporary disable all tests in class ")
 public class TestService1
     extends Service1 //Тестируемый класс
 {
-    //Nногда нужно отключить тест, делается при помощи аннотации @org.junit.Ignore
-    //@Ignore("Sometimes you want temporary disable test")
-    @Test
+    //Nногда нужно отключить тест (@Test), делается при помощи аннотации @org.junit.Ignore
+    //@Ignore("Sometimes you want temporary disable test @Test")
+    @Test //Точка входа в сам тест (тестов, точек входа, может быть несколько)
     public void testMessage()
     {
         //Тестирование private метода
@@ -42,4 +42,40 @@ public class TestService1
         Assert.assertEquals(4, this.serviceMethod_public(4));
         //System.out.println("MESSAGE " + str);
     }
+    
+    //Следующие 2 метода имеет смыслс использовать когда у нас один тест (@Test), или
+    //   когда ресурсы выделяются полностью одинаково для всех тестов (@Test) текущего класса
+    @Before //Nспользуется для инициализации окружения теста, перед запуском каждого теста (@Test)
+    public void beforeTest()
+    {
+        
+    }
+    @After //Nспользуется для деинициализации теста, освобождения ресурсов, после прохождения каждого теста (@Test)
+    public void afterTest()
+    {
+        //Вызовется даже если @Before или @Test бросил исключение
+    }
+    
+    //В одном классе может быть несколько тестов, в таком случае больше подходит инициализация ресурсов для класса (см. ниже)
+    @Test //Точка входа в еще один тест в данном классе
+    public void testMessage2()
+    {
+        
+    }
+    //Nспользуется для инициализации класса теста, для единого выделения ресурсов для нескольких тестов (@Test) в классе
+    @BeforeClass
+    public static void beforeClassTest()
+    {
+        
+    }
+    //Освобождение ресурсов выделенных для класса теста, после прохождения всех тестов класса
+    @AfterClass
+    public static void afterClass()
+    {
+        //Вызовется даже если @BeforeClass метод бросил исключение
+    }
+    
+    //@Test может иметь параметр expected в котором можно перечислить допустимые классы исключений
+    //  которые может бросать тест и это не будет считаться ошибкой теста
+    //@Test может иметь параметр timeout в миллисекундах, если тест работает дольше, то он прерывается с ошибкой
 }
