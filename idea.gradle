@@ -1,1 +1,4 @@
 apply plugin: 'idea'
+
+//Для генерации проектных файлов запустить
+//  gradle idea --build-file idea.gradle
