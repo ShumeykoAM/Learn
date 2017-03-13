@@ -13,7 +13,11 @@ public class Book
 
     public int getNumber() { return number; }
     public void setNumber(int number) { this.number = number; }
-
+    public String getName()
+    {
+        return name;
+    }
+    
     private int number = 0;
     private String name;
 }
