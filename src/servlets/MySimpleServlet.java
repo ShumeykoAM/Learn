@@ -1,10 +1,14 @@
 package servlets;
 
-import java.io.IOException;
-import java.io.PrintWriter;
+import ejb.StatefulEJB;
+import ejb.StatelessEJB;
+
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  * @author Kot
@@ -17,6 +21,9 @@ import javax.servlet.http.*;
 public class MySimpleServlet
 	extends HttpServlet
 {
+    @EJB StatelessEJB myLessBean;
+    @EJB StatefulEJB myFulBean;
+    
 	static class SomeData //Класс данных для хранения в сессиях
 	{
 		public int count;
@@ -46,11 +53,15 @@ public class MySimpleServlet
 		req.setCharacterEncoding("utf-8");
 		pw.println("Запрошено " + req.getParameter("RequestText"));
 		pw.println("Значение в Cookie = " + myCookie.getValue());
+        pw.println(myLessBean.sayHelloWorld());
+        pw.println(myFulBean.sayHelloWorld());
 		pw.close();
 	}
 
 	@Override protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
 	{
+	    myFulBean.endSession();
+	    
 		//TODO Сессии (так называемый URL RE-writing)
 
 		//Запросить существующую сессию, если нету, то true означает, что ее надо создать
