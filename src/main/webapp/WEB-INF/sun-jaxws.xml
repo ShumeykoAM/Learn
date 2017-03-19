@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoints
+        xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime"
+        version="2.0">
+    <endpoint name="printFigure" implementation="com.services.jax_ws.PrintFigureImpl" url-pattern="/figure"/>
+</endpoints>
+
+
+
+        <!--проверить работу сервиса можно по ссылке http://localhost:8080/gradle/figure?wsdl  , в браузере появится WSDL-описание веб сервиса-->
