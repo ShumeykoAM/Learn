@@ -2,3 +2,8 @@ apply plugin: 'idea'
 
 //Для генерации проектных файлов запустить
 //  gradle idea --build-file idea.gradle
+
+//Генерация конфигурации запуска, можно от сюда начать поиск инфы как это сделать: https://github.com/JavaPosseRoundup/job-dsl-plugin/blob/master/gradle/ide.gradle
+//  А пока что можноиспользовать xml конфигурацию. В файле ConfiguringRunAndDebug.idea.xml представлена конфигурация запуска, которую надо вставить
+//      как дочернее дерево текгов в тег <component name="RunManager" selected="GlassFish Server.GlassFish"> в, сгенерированном задачей gradle idea, файле .iws
+//      и не забыть заменить   ---------------------------------  на имя файла .iws
