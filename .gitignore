@@ -1,6 +1,7 @@
 \.gradle
 \.idea
 \build
-\gradle.ipr
-\gradle.iws
-\gradle.iml
+\out
+/*.ipr
+/*.iws
+/*.iml
