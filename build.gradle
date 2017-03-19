@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'war'
 
 //repositories {
 //    mavenCentral() //Не работает из за какой то лицензии, надо разобраться
@@ -9,10 +10,13 @@ dependencies{
     //Для конфигурации testCompile  мы указываем зависимость, для импорта org.junit
     testCompile fileTree(dir: 'src/test/library', include: '*.jar')
 
+    //compile project(':common')
+    
     // https://mvnrepository.com/artifact/javax.validation/validation-api
     //compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Alpha1'
     compile fileTree(dir:'src/main/library')
-
+    compile fileTree(dir:'src/library')
+    
 }
 
 test.doFirst{
@@ -36,4 +40,17 @@ build.doLast{
             into ('build/classes/main/META-INF')
         }          
     //}
+}
+
+task runDeploy(dependsOn: 'war', type:Exec) {
+    workingDir "${glassfishHome}${File.separator}bin"
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        commandLine 'cmd', '/c', 'asadmin.bat'
+    } else {
+        commandLine "./asadmin"
+    }
+    args "deploy", "--force=true", "${war.archivePath}"
+
+    //Можно сразу на web страницу перепрыгнуть, только она открывается раньше, чем deploy произойдет :(
+    //java.awt.Desktop.desktop.browse "http://localhost:8080/gradle".toURI()
 }
