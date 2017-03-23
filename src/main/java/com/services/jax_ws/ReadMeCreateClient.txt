@@ -1,7 +1,7 @@
 Для начала надо создать папку где ни будь внутри проекта сервера, например папку generate_folder в пакете com.services.jax_ws,
 потом используя команду wsimport, находится в JDK, генерим файлы, добавляем к ним PrintFigureService.java
 
-wsimport -d generate_folder -keep http://localhost:8080/gradle/figure?wsdl
+wsimport -d generate_folder -keep http://localhost:8080/myserver/figure?wsdl
 
 //А вот так можно обратиться к сервису
 PrintFigureImplService figureService = new PrintFigureImplService();

@@ -42,15 +42,28 @@ build.doLast{
     //}
 }
 
-task runDeploy(dependsOn: 'war', type:Exec) {
-    workingDir "${glassfishHome}${File.separator}bin"
-    if (System.properties['os.name'].toLowerCase().contains('windows')) {
-        commandLine 'cmd', '/c', 'asadmin.bat'
-    } else {
-        commandLine "./asadmin"
-    }
-    args "deploy", "--force=true", "${war.archivePath}"
+war {
+    archiveName = "${warName}"
+}
 
-    //Можно сразу на web страницу перепрыгнуть, только она открывается раньше, чем deploy произойдет :(
-    //java.awt.Desktop.desktop.browse "http://localhost:8080/gradle".toURI()
+task runDeploy(dependsOn: 'war', type:Exec) {
+    if ( System.getenv('GLASSFISH_HOME') == null) {
+        println("WARNING: Deployment is not possible, cause not set environment variable GLASSFISH_HOME")
+        enabled = false //Отключим таск, он не будет выполняться (doFist и doLast)
+    } else {
+        workingDir "${System.env.GLASSFISH_HOME}${File.separator}bin"
+        if (System.properties['os.name'].toLowerCase().contains('windows')) {
+            commandLine 'cmd', '/c', 'asadmin.bat'
+        } else {
+            commandLine "./asadmin"
+        }
+        args "deploy", "--force=true", "${war.archivePath}"
+    }
+    doLast{
+        java.awt.Desktop.desktop.browse "http://localhost:8080/myserver".toURI()
+    }
+}
+
+//Для idea, что бы имя варника правильное было
+task runWar(dependsOn: 'war') {
 }
