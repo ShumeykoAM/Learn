@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+        "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+
+    <form-beans>   <!--Список форм-->
+        <form-bean name="Registration"
+                   type="com.struts.registration.RegistrationForm"/>
+        <form-bean name="UserAccount"
+                   type="com.struts.users.UserAccountForm"/>
+    </form-beans>
+
+    <action-mappings>  <!--Список акшинов для форм-->
+        <action name="Registration"
+                path="/struts/Registration"
+                type="com.struts.registration.RegistrationAction"
+                scope="request"
+                validate="true"
+                input="/jsp/registration.jsp">
+            <forward name="success"
+                     path="/jsp/user_account.jsp" redirect="true"/>
+        </action>
+        <action name="UserAccount"
+                path="/struts/UserAccount"
+                type="com.struts.users.UserAccountAction"
+                scope="session"
+                validate="true"
+                input="jsp/user_account.jsp">
+            <forward name="exit"
+                     path="/index.jsp" redirect="true"/>
+        </action>
+    </action-mappings>
+
+    <!--Текстовые ресурсы-->
+    <message-resources parameter="properties.registration" key="bundleRes1"/>
+    <message-resources parameter="properties.users.user_account" key="bundleRes2"/>
+
+</struts-config>

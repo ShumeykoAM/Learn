@@ -1,11 +1,10 @@
 package com.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 /**
  * @author kot
@@ -18,14 +17,59 @@ import javax.servlet.http.HttpServletResponse;
 public class MainServlet
     extends HttpServlet
 {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException
+    static class SomeData //Класс данных для хранения в сессиях
     {
-        try
-        {
-            response.getWriter().println("I worked three");
-        }
-        catch (IOException e)
-        {   }
+        public int count;
+    }
+    
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        //TODO Сессии (так называемый URL RE-writing)
+
+        //Запросить существующую сессию, если нету, то true означает, что ее надо создать
+        HttpSession session = req.getSession(true);
+
+        SomeData someData = (SomeData)session.getAttribute("SomeData"); //Попытаемся получить объект из сессии
+        if(someData == null)
+            someData = new SomeData();                   //  если его там нету, то создаем новый
+        someData.count++;
+        session.setAttribute("SomeData", someData);    //Помещаем (замещаем) объект в сессию как именованный атрибут
+
+        if(someData.count == 6)
+            session.invalidate();  //Сессию можно завершить
+
+        resp.setContentType("text/html; charset=UTF-8");
+        PrintWriter pw = resp.getWriter();
+        req.setCharacterEncoding("utf-8");
+        pw.println("Запрошено  " + req.getParameter("RequestText"));
+        pw.println("Значение в session = " + someData.count);
+        pw.close();
+    }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+    {
+        //TODO Cookie
+        Cookie myCookie = null;
+        for(Cookie cookie : req.getCookies())  //Получаем массив cookie от броузера и ищем там нужное мне cookie
+            if(cookie.getName().equals("count"))
+            {
+                myCookie = cookie;                 //Нашли сохраненное раньше cookie
+                break;
+            }
+        if(myCookie == null)
+            myCookie = new Cookie("count", "0"); //    иначе не нашли, создаем новую
+
+        //Задаем (меняем) значение, которое хранится в cookie
+        myCookie.setValue( ((Integer)(Integer.parseInt(myCookie.getValue()) + 1)).toString() );
+        myCookie.setMaxAge(5);     //Время жизни cookie в секундах, после которого оно умирает
+        resp.addCookie(myCookie);  //Добавляем в ответ cookie, это cookie будет хранить браузер
+
+        resp.setContentType("text/html; charset=UTF-8");
+        PrintWriter pw = resp.getWriter();
+        req.setCharacterEncoding("utf-8");
+        pw.println("Запрошено " + req.getParameter("RequestText"));
+        pw.println("Значение в Cookie = " + myCookie.getValue());
+        pw.close();
     }
 }
