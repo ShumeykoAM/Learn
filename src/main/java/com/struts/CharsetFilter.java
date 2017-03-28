@@ -1,4 +1,4 @@
-package struts;
+package com.struts;
 
 import java.io.IOException;
 import javax.servlet.*;
