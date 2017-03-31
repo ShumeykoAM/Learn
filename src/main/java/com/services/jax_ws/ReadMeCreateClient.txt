@@ -8,3 +8,6 @@ PrintFigureImplService figureService = new PrintFigureImplService();
 PrintFigureImpl service = figureService.getPrintFigureImplPort();
 String r1 = service.showInfo(CIRCLE, Arrays.asList(2) );
 String r2 = service.showInfo(RECTANGLE, Arrays.asList(4, 6));
+
+
+Данный пример сделан по материалам http://dev-blogs.com/web-service-jax-ws/
