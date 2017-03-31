@@ -41,7 +41,6 @@ public class MainServlet
 
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter pw = resp.getWriter();
-        req.setCharacterEncoding("utf-8");
         pw.println("Запрошено  " + req.getParameter("RequestText"));
         pw.println("Значение в session = " + someData.count);
         pw.close();
@@ -67,7 +66,6 @@ public class MainServlet
 
         resp.setContentType("text/html; charset=UTF-8");
         PrintWriter pw = resp.getWriter();
-        req.setCharacterEncoding("utf-8");
         pw.println("Запрошено " + req.getParameter("RequestText"));
         pw.println("Значение в Cookie = " + myCookie.getValue());
         pw.close();
