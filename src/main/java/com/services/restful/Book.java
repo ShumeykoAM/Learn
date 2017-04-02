@@ -1,9 +1,6 @@
 package com.services.restful;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author kot
@@ -14,7 +11,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 //Наш старый добрый POJO у которого должен быть конструктор без параметров и геттеры и сеттеры
 @XmlRootElement  //Это значит что объект данного класса может преобразовываться в xml или json, преобразованием занимается JEE сервер
-@XmlAccessorType(XmlAccessType.PROPERTY)
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Book", propOrder = {"name"})
 public class Book
 {
     public Book()
@@ -35,7 +33,6 @@ public class Book
         this.name = name;
     }
 
-    //@XmlAttribute
-    @XmlElement(name = "name")
+    @XmlElement
     private String name;
 }
