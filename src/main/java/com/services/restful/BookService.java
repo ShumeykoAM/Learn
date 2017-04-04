@@ -46,12 +46,24 @@ public class BookService
         return Arrays.asList(new Book[]{new Book(par), new Book("Second")}); //Вернем список объектов
     }
 
-    @Consumes({"application/json", "application/xml"})
+    //Получаем POJO, в pospman указываем
+    //http://localhost:8080/myserver/rf_resources/book/add.book
+    //<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+    //<book>
+    //    <name>Книга из postman</name>
+    //</book>
+    //Можно и json,
+    //в Content-Type указать    application/json ;charset=UTF-8
+    //{
+    //    "name": "Название книги"
+    //}
+    @Consumes({"application/xml", "application/json; charset=UTF-8"})
+    @Produces({"application/xml", "application/json; charset=UTF-8"})
     @Path("/add.book")
     @POST
-    public void createBook(@BeanParam Book newBook) //С передачей бина еще надо разобраться, сам бин надо правильно настроить наверное
+    public Book createBook(Book newBook)
     {
-        
+        return newBook;
     }
 
 }

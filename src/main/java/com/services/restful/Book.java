@@ -28,6 +28,8 @@ public class Book
     {
         return name;
     }
+
+    //@PathParam("name")
     public void setName(String name)
     {
         this.name = name;
@@ -35,4 +37,18 @@ public class Book
 
     @XmlElement
     private String name;
+/*
+
+    @HeaderParam("Content-Type")
+    String contentType;
+
+    public String getContentType()
+    {
+        return contentType;
+    }
+
+    public void setContentType(String contentType)
+    {
+        this.contentType = contentType;
+    }*/
 }
