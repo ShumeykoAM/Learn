@@ -1,5 +1,7 @@
 \.gradle
 \.idea
+\.ideaDataSources
+\dataSources
 \build
 \out
 /*.ipr
