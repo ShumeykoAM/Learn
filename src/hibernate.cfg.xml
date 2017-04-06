@@ -4,10 +4,12 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:sqlite:D:/learn/web3/db/db_first.db</property>
+        <property name="connection.url">jdbc:sqlite:C:/work/MyLearn/web/web3/db/db_first.db</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="hibernate.dialect">dialect.SQLiteDialect</property>
         <property name="generate_statistics">false</property>
+        <mapping resource="hibernate/Students.hbm.xml"/>
+        <mapping resource="hibernate/Student.hbm.xml"/>
 
         <!--<mapping resource="entities/........hbm.xml"/>-->
 
