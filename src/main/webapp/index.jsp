@@ -21,5 +21,6 @@
             <input type=Submit value="Перейти к сервлету методом  get">
         </Form>
         <a href="jsp/registration.jsp">Регистрация</a>
+        <a href="jsp/homePage.jsp">Домашняя страница</a>
     </body>
 </html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 1.1//EN"
+        "http://struts.apache.org/dtds/tiles-config_1_1.dtd">
+<tiles-definitions>
+    <definition name="AllLayOut" path="/layouts/CommonLayout.jsp">
+        <put name="title" value="Заголовок по умолчанию"/> <!--Зададим значение по умолчанию, тогда при исаользовании этого layout можно не задавать значение этого put-->
+        <put name="header" value="/jsp/common/header.jsp"/>
+        <put name="body"/>
+        <put name="footer" value="/jsp/common/footer.jsp"/>
+    </definition>
+</tiles-definitions>
