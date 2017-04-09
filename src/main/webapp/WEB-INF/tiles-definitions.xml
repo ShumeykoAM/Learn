@@ -9,4 +9,10 @@
         <put name="body"/>
         <put name="footer" value="/jsp/common/footer.jsp"/>
     </definition>
+
+    <definition name="inheritedLayOut" extends="AllLayOut"> <!--Наследуемся от другого дефинишина-->
+        <put name="header" value="/jsp/inheritedHeader.jsp"/> <!--Переопределяем значение put по умолчанию-->
+        <put name="body" value="/jsp/inheritedBody.jsp"/>
+    </definition>
+    
 </tiles-definitions>
