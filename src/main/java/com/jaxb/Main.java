@@ -4,6 +4,8 @@ import com.services.restful.Book;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.sql.Timestamp;
+import java.util.Date;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -22,13 +24,13 @@ public class Main
 		try
 		{
 			//Маршализация объекта
-			String sdata = marshal(Data.class, new Data("логин", "Имя", "Телефон", new Data.Address("Россия")));
+			String sdata = marshal(Data.class, new Data("логин", "Имя", "Телефон", new Data.Address("Россия"), new Timestamp(new Date().getTime())));
 			Data data = unmarshal(Data.class, sdata);
 
 			//Маршализация объекта со списком объектов
 			DataCentre dataCentre = new DataCentre();
 			dataCentre.add(data);
-			dataCentre.add(new Data("логин2", "Имя2", "789639449", new Data.Address("Беларусь")));
+			dataCentre.add(new Data("логин2", "Имя2", "789639449", new Data.Address("Беларусь"), new Timestamp(new Date().getTime())));
 			String scentre = marshal(DataCentre.class, dataCentre);
 			DataCentre unDataCentre = unmarshal(DataCentre.class, scentre);
 
