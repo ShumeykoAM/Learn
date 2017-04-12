@@ -1,13 +1,9 @@
-Для начала надо создать папку где ни будь внутри проекта сервера, например папку generate_folder в пакете com.services.jax_ws,
-потом используя команду wsimport, находится в JDK, генерим файлы, добавляем к ним PrintFigureService.java
+Создаем папку generate_folder, курсор фара на данной папке,
+потом используя команду wsimport, находится в JDK, генерим файлы
 
-wsimport -d generate_folder -keep http://localhost:8080/myserver/figure?wsdl
+wsimport -d generate_folder -keep http://localhost:8080/myserver/my_url_pattern?wsdl
+Используем сгенерированные файлы для открытия клиента и вызова методов сервиса
 
-//А вот так можно обратиться к сервису
-PrintFigureImplService figureService = new PrintFigureImplService();
-PrintFigureImpl service = figureService.getPrintFigureImplPort();
-String r1 = service.showInfo(CIRCLE, Arrays.asList(2) );
-String r2 = service.showInfo(RECTANGLE, Arrays.asList(4, 6));
-
+Еще по WSDL можно сгенерить и серверную часть
 
 Данный пример сделан по материалам http://dev-blogs.com/web-service-jax-ws/

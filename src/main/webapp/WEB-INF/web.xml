@@ -39,13 +39,13 @@
         </listener-class>
     </listener>
     <servlet>
-        <servlet-name>figure</servlet-name>
+        <servlet-name>my_jax_ws</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>figure</servlet-name>
-        <url-pattern>/figure</url-pattern>
+        <servlet-name>my_jax_ws</servlet-name>
+        <url-pattern>/my_url_pattern</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>120</session-timeout>
