@@ -1,6 +1,9 @@
 package com.jaxb;
 
+import java.sql.Timestamp;
 import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * @author kot
@@ -11,17 +14,18 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Data", propOrder = {"name", "telephone", "address"}) // propOrder - позволяет указать порядок маршализации
+@XmlType(name = "Data", propOrder = {"name", "telephone", "address", "lastLoginDate"}) // propOrder - позволяет указать порядок маршализации
 public class Data
 {
 	public Data(){}
 
-	public Data(String login, String name, String telephone, Address address)
+	public Data(String login, String name, String telephone, Address address, Timestamp lastLoginDate)
 	{
 		this.login = login;
 		this.name = name;
 		this.telephone = telephone;
 		this.address = address;
+		this.lastLoginDate = lastLoginDate;
 	}
 
 	public String getLogin()
@@ -100,5 +104,23 @@ public class Data
 
 	@XmlElement
 	private Address address = new Address();
+
+	@XmlJavaTypeAdapter(TSAdapter.class) //Будет маршализироваться как элемент, тип этого элемента предоставит класс адаптера
+	private Timestamp lastLoginDate;
+
+
+	//Адаптер элемента или атрибута
+	private static class TSAdapter extends XmlAdapter<Long, Timestamp>
+	{
+		@Override public Timestamp unmarshal(Long aLong) throws Exception
+		{
+			return new Timestamp(aLong);
+		}
+
+		@Override public Long marshal(Timestamp v) throws Exception
+		{
+			return v.getTime();
+		}
+	}
 
 }
