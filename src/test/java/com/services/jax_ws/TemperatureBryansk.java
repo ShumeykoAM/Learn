@@ -28,6 +28,21 @@ public interface TemperatureBryansk {
      * 
      * @param arg0
      * @return
+     *     returns com.services.jax_ws.Book
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getLikeBook", targetNamespace = "http://jax_ws.services.com/", className = "com.services.jax_ws.GetLikeBook")
+    @ResponseWrapper(localName = "getLikeBookResponse", targetNamespace = "http://jax_ws.services.com/", className = "com.services.jax_ws.GetLikeBookResponse")
+    @Action(input = "http://jax_ws.services.com/TemperatureBryansk/getLikeBookRequest", output = "http://jax_ws.services.com/TemperatureBryansk/getLikeBookResponse")
+    public Book getLikeBook(
+        @WebParam(name = "arg0", targetNamespace = "")
+        Book arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
      *     returns java.lang.String
      */
     @WebMethod
