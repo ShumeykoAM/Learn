@@ -21,6 +21,7 @@ public class TestJaxWS
 			TemperatureBryanskService temperatureBryanskService = new TemperatureBryanskService();
 			TemperatureBryansk temperatureBryansk = temperatureBryanskService.getTemperatureBryanskPort();
 			String t = temperatureBryansk.getTemperature(2);
+			Book book = temperatureBryansk.getLikeBook(new Book("Хорошая книга"));
 			System.out.println(t);
 		}
 		catch (Throwable e)
