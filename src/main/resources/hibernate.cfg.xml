@@ -4,12 +4,13 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:sqlite:D:\learn\gradle\src\main\resources\db\db_first.db</property>
+        <property name="connection.url">jdbc:sqlite:D:\gradle\src\main\resources\db\db_first.db</property>
         <property name="connection.driver_class">org.sqlite.JDBC</property>
         <property name="hibernate.dialect">com.hibernate.dialect.SQLiteDialect</property>
         <property name="generate_statistics">false</property>
         <!--<property name="hbm2ddl.auto">create</property> стирает все заипси в таблице-->
 
         <mapping resource="hibernate/entities/Students.hbm.xml"/>
+        <mapping class="com.hibernate.entities.StudentsJPA"/>
     </session-factory>
 </hibernate-configuration>

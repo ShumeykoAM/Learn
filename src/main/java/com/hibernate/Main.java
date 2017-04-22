@@ -1,6 +1,7 @@
 package com.hibernate;
 
 import com.hibernate.entities.Students;
+import com.hibernate.entities.StudentsJPA;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -16,6 +17,8 @@ public class Main
 
         try
         {
+            //org.hibernate.id.enhanced.TableGenerator
+            //org.hibernate.id.IdentityGenerator
 
             ServiceRegistry serviceRegistry;
             Configuration configuration = new Configuration();
@@ -23,12 +26,17 @@ public class Main
             SessionFactory sessionFactory = configuration.buildSessionFactory();
             Session session = sessionFactory.openSession();
 
-            Students students = new Students();
-            students.setName("Имя4");
-            students.setId(8);
-
             Transaction transaction = session.beginTransaction();
+
+            StudentsJPA st = new StudentsJPA();
+            st.setName("wewewewe");
+            session.persist(st);
+
+            Students students = new Students();
+            students.setName("Имя67");
+            students.setId(68);
             session.persist(students);
+
             transaction.commit();
 
             Query query = session.createNamedQuery("query.q1");
