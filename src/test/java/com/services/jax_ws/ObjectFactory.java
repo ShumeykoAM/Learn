@@ -25,6 +25,9 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetTemperature_QNAME = new QName("http://jax_ws.services.com/", "getTemperature");
+    private final static QName _GetLikeBook_QNAME = new QName("http://jax_ws.services.com/", "getLikeBook");
+    private final static QName _GetLikeBookResponse_QNAME = new QName("http://jax_ws.services.com/", "getLikeBookResponse");
+    private final static QName _Book_QNAME = new QName("http://jax_ws.services.com/", "book");
     private final static QName _GetTemperatureResponse_QNAME = new QName("http://jax_ws.services.com/", "getTemperatureResponse");
 
     /**
@@ -43,6 +46,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Book }
+     * 
+     */
+    public Book createBook() {
+        return new Book();
+    }
+
+    /**
+     * Create an instance of {@link GetLikeBookResponse }
+     * 
+     */
+    public GetLikeBookResponse createGetLikeBookResponse() {
+        return new GetLikeBookResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetLikeBook }
+     * 
+     */
+    public GetLikeBook createGetLikeBook() {
+        return new GetLikeBook();
+    }
+
+    /**
      * Create an instance of {@link GetTemperature }
      * 
      */
@@ -57,6 +84,33 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://jax_ws.services.com/", name = "getTemperature")
     public JAXBElement<GetTemperature> createGetTemperature(GetTemperature value) {
         return new JAXBElement<GetTemperature>(_GetTemperature_QNAME, GetTemperature.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLikeBook }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://jax_ws.services.com/", name = "getLikeBook")
+    public JAXBElement<GetLikeBook> createGetLikeBook(GetLikeBook value) {
+        return new JAXBElement<GetLikeBook>(_GetLikeBook_QNAME, GetLikeBook.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetLikeBookResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://jax_ws.services.com/", name = "getLikeBookResponse")
+    public JAXBElement<GetLikeBookResponse> createGetLikeBookResponse(GetLikeBookResponse value) {
+        return new JAXBElement<GetLikeBookResponse>(_GetLikeBookResponse_QNAME, GetLikeBookResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link Book }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://jax_ws.services.com/", name = "book")
+    public JAXBElement<Book> createBook(Book value) {
+        return new JAXBElement<Book>(_Book_QNAME, Book.class, null, value);
     }
 
     /**
