@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.hibernate.entities.Student" table="STUDENT">
+        <!--<id name="id" type="long" column="ID">
+            <generator class="native">
+                <param name="sequence">S_STUDENT</param>
+            </generator>
+        </id>-->
+
+        <!--<property name="name"               type="string"               column="NAME"               not-null="false"/>-->
+
+        <id name="id" column="ID"/>
+        <property name="name" column="NAME"/>
+
+    </class>
+    <query name="query.q1">
+        from com.hibernate.entities.Student s
+        order by s.id
+    </query>
+
+</hibernate-mapping>

@@ -1,7 +1,6 @@
 package com.hibernate;
 
-import com.hibernate.entities.Students;
-import com.hibernate.entities.StudentsJPA;
+import com.hibernate.entities.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -28,14 +27,11 @@ public class Main
 
             Transaction transaction = session.beginTransaction();
 
-            StudentsJPA st = new StudentsJPA();
+            Student st = new Student();
             st.setName("wewewewe");
+            st.setId(1);
+            
             session.persist(st);
-
-            Students students = new Students();
-            students.setName("Имя67");
-            students.setId(68);
-            session.persist(students);
 
             transaction.commit();
 

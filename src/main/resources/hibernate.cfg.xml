@@ -3,14 +3,22 @@
         "-//Hibernate/Hibernate Configuration DTD//EN"
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-    <session-factory>
-        <property name="connection.url">jdbc:sqlite:D:\gradle\src\main\resources\db\db_first.db</property>
-        <property name="connection.driver_class">org.sqlite.JDBC</property>
-        <property name="hibernate.dialect">com.hibernate.dialect.SQLiteDialect</property>
-        <property name="generate_statistics">false</property>
-        <!--<property name="hbm2ddl.auto">create</property> стирает все заипси в таблице-->
 
-        <mapping resource="hibernate/entities/Students.hbm.xml"/>
-        <mapping class="com.hibernate.entities.StudentsJPA"/>
+    <session-factory>
+
+        <!--  Oracle 10g Configuration -->
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</property>
+        <property name="connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="connection.url">jdbc:oracle:thin:@//localhost:1521/orcl</property>
+        <property name="connection.username">CSA</property>
+        <property name="connection.password">123456</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="show_sql">true</property>
+
+        <!-- Mapping files -->
+        <mapping resource="hibernate/entities/Student.hbm.xml"/>
+
+        <!-- Common -->
+
     </session-factory>
 </hibernate-configuration>
