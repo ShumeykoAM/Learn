@@ -2,25 +2,14 @@ package com.hibernate.entities;
 
 /**
  * @author Kot
- * @ created 24.04.2017
+ * @ created 01.05.2017
  * @ $Author$
  * @ $Revision$
  */
-public class Student
+public class Course
 {
 	private long id;
 	private String name;
-	private Course course;
-
-	public Course getCourse()
-	{
-		return course;
-	}
-
-	public void setCourse(Course course)
-	{
-		this.course = course;
-	}
 
 	public long getId()
 	{

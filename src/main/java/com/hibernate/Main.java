@@ -1,5 +1,6 @@
 package com.hibernate;
 
+import com.hibernate.entities.Course;
 import com.hibernate.entities.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -27,9 +28,15 @@ public class Main
 
             Transaction transaction = session.beginTransaction();
 
+            Course course = new Course();
+            course.setId(1);
+            course.setName("Математика");
+            session.persist(course);
+
             Student st = new Student();
-            st.setName("wewewewe");
             st.setId(1);
+            st.setName("Иванов");
+            st.setCourse(course);
             
             session.persist(st);
 

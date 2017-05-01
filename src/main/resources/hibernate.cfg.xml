@@ -17,6 +17,7 @@
 
         <!-- Mapping files -->
         <mapping resource="hibernate/entities/Student.hbm.xml"/>
+        <mapping resource="hibernate/entities/Course.hbm.xml"/>
 
         <!-- Common -->
 

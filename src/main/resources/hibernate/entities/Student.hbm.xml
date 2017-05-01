@@ -11,10 +11,9 @@
             </generator>
         </id>-->
 
-        <!--<property name="name"               type="string"               column="NAME"               not-null="false"/>-->
-
         <id name="id" column="ID"/>
-        <property name="name" column="NAME"/>
+        <property name="name"               type="string"               column="NAME"               not-null="false"/>
+        <many-to-one name="course" class="com.hibernate.entities.Course" column="ID_COURSE" lazy="false" not-null="false"/>
 
     </class>
     <query name="query.q1">
