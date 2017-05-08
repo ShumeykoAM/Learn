@@ -5,7 +5,9 @@
 <hibernate-mapping>
 
     <class name="com.hibernate.entities.Course" table="COURSE" schema="CSA">
-        <id       name="id"                 type="long"                 column="ID"/>
+        <id       name="id"                 type="long"                 column="ID">
+            <generator class="org.hibernate.id.IncrementGenerator"/><!--Можно сделать свою реализацию генератора по образцу указанного-->
+        </id>
         <property name="name"               type="string"               column="NAME"               not-null="false"/>
     </class>
 

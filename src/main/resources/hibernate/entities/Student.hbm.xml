@@ -5,17 +5,13 @@
 <hibernate-mapping>
 
     <class name="com.hibernate.entities.Student" table="STUDENT">
-        <!--<id name="id" type="long" column="ID">
-            <generator class="native">
-                <param name="sequence">S_STUDENT</param>
-            </generator>
-        </id>-->
-
-        <id name="id" column="ID"/>
+        <id name="id" type="long" column="ID">
+            <generator class="org.hibernate.id.IncrementGenerator"/><!--Можно сделать свою реализацию генератора по образцу указанного-->
+        </id>
         <property name="name"               type="string"               column="NAME"               not-null="false"/>
         <many-to-one name="course" class="com.hibernate.entities.Course" column="ID_COURSE" lazy="false" not-null="false"/>
-
     </class>
+
     <query name="query.q1">
         from com.hibernate.entities.Student s
         order by s.id

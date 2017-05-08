@@ -29,16 +29,13 @@ public class Main
             Transaction transaction = session.beginTransaction();
 
             Course course = new Course();
-            course.setId(1);
-            course.setName("Математика");
+            course.setName("Литература");
             session.persist(course);
 
-            Student st = new Student();
-            st.setId(1);
-            st.setName("Иванов");
-            st.setCourse(course);
-            
-            session.persist(st);
+            Student student = new Student();
+            student.setName("Иванов");
+            student.setCourse(course);
+            session.persist(student);
 
             transaction.commit();
 
