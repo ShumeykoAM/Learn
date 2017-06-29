@@ -1,10 +1,9 @@
 
-
 //Соответствие ножек проца выполняемым функциям
 enum PINS
 {
   pinForINT0 = 2,  //Прерывание INT0
-  pinForINT1 = 3,  //Прерывание INT0
+  pinForINT1 = 3,  //Прерывание INT1
 
   pinForBit0 = 4,              //Номер ножки 0 бита
   pinForBit1 = pinForBit0 + 1, //Номер ножки 1 бита
@@ -19,27 +18,30 @@ enum PINS
   pinForCLK = 13, //импульс для переключения выхода счетчика дешифратора
 };
 
-//Перечисление выходов счетчика дешифратора
-enum QUIT
-{
-  Q00, //входящие сигналы
-  Q01, //TR0
-  Q02, //TR1
-  Q03, Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q11, Q12, Q13, Q14, Q15
-};
 
 //Регистр (один из регистров подключенных через выход или сигналы входа)
 class Register
 {
+  //Перечисление выходов счетчика дешифратора
+public:
+  enum QUIT
+  {
+    Q00, //входящие сигналы
+    Q01, //TR0
+    Q02, //TR1
+    Q03, Q04, Q05, Q06, Q07, Q08, Q09, Q10, Q11, Q12, Q13, Q14, Q15
+  };
+
   /*Счетчик дешифратор, (Имеет 16 выводов на каждый из которых мы можем повесить или регистр вывода или ввод данных, нужен для последовательной обработки большого количества устройств)
   Настраивает биты процессора, переключает выход
   */
+private:
   class Quit
   {
   public:
     static Quit instance;       //Синглтон
 
-    //Задать текущий выход
+                                //Задать текущий выход
     void setQuit(QUIT quit)
     {
       if (curQuit == quit)
@@ -51,7 +53,7 @@ class Register
       while (curQuit != quit)
         goNextQuit();
       //Если это выход вывода, то переключаем ножки проца в режим выхода
-      if(getIo(curQuit) == OUTPUT)
+      if (getIo(curQuit) == OUTPUT)
         for (uint8_t pin = pinForBit0; pin <= pinForBit7; ++pin)
           pinMode(pin, OUTPUT);
     }
@@ -116,7 +118,7 @@ class Register
 
     QUIT curQuit;  //Текущий активный выход (при старте нулевой)
 
-            //Переключить счетчик дешифратор на след. выход
+                   //Переключить счетчик дешифратор на след. выход
     unsigned char goNextQuit()
     {
       const uint8_t countQuits = 16; //Количество выходов счетчика дешифратора
@@ -128,7 +130,7 @@ class Register
         curQuit = Q00;
     }
   };
-  
+
 
   //================================================================
   uint8_t bits; //Биты регистра
@@ -159,23 +161,17 @@ public:
       Quit::instance.setQuit(quit);
       Quit::instance.INH_on();
       for (uint8_t pinPC = pinForBit0, pinR = 0; pinPC <= pinForBit7; ++pinPC, ++pinR)
-      {
-        digitalWrite(1, HIGH);
-        delay(500);
-        int state = digitalRead(pinPC);
-        digitalWrite(0, state);
-        setBit(pinR, state);
-        delay(500);
-        digitalWrite(1, LOW);
-        delay(500);
-      }
+        setBit(pinR, digitalRead(pinPC));
       Quit::instance.INH_off();
     }
   }
 
   void setBit(uint8_t bit, int state)
   {
-    bits |= 1 << bit;
+    if (state == HIGH)
+      bits |= 1 << bit;
+    else
+      bits &= ~(1 << bit);
   }
   int getBit(uint8_t bit)
   {
@@ -193,65 +189,68 @@ public:
 };
 Register::Quit Register::Quit::instance;
 
-Register b1(Q00);
-Register r1(Q01);
+Register sensors(Register::Q00); //Кнопки, датчики
+Register r1(Register::Q01);
+
 
 //Прерывания
-class Interrupt
+class Interrupts
 {
+  static const uint8_t P_INT0 = 0;
+  static const uint8_t P_INT1 = 1;
+
+  //Нужно обработать одно или несколько событий
+  static bool needEvent;
+
+  //Обработчик критических ошибок сбоев и т.д.
+  static void error()
+  {
+    /*TODO*/
+
+  }
+  //Произошло событие (сработал датчик, кнопка нажата и т.д.)
+  static void event()
+  {
+    needEvent = true;
+  }
 public:
-  static void handler();
-private:
+  static void setup()
+  {
+    pinMode(pinForINT0, INPUT_PULLUP); attachInterrupt(P_INT0, &event, FALLING);
+    pinMode(pinForINT1, INPUT_PULLUP); attachInterrupt(P_INT1, &error, FALLING);
+    needEvent = true;
+  }
+  //Обработать все события, если они есть
+  static void eventHandler()
+  {
+    if (needEvent)
+    {
+      sensors.read();
+      needEvent = false;
 
+      r1.setRegister(sensors.getRegister());
+      r1.write();
+
+      
+    }
+  }
 };
-void Interrupt::handler()
-{
+bool Interrupts::needEvent;
 
-  
-  //r1.setBit(0, HIGH);
-}
 
 //Изначальные установки
 void setup()
 {
-  pinMode(pinForINT0, INPUT_PULLUP);
-  pinMode(pinForINT1, INPUT_PULLUP);
-
-  pinMode(pinForINT0, INPUT_PULLUP); attachInterrupt(0, Interrupt::handler, FALLING);
-  pinMode(pinForINT1, INPUT_PULLUP); attachInterrupt(1, globalError, FALLING); //Один пин используем для прерывания в случае глобальной ошибки
-
-  pinMode(1, OUTPUT);
-  pinMode(0, OUTPUT);
-}
-
-//Обработчик критических ошибок сбоев и т.д.
-void globalError()
-{
+  Interrupts::setup();
 
 }
-
 
 //Рабочий цикл
 void loop()
 {
-  
-  b1.read();
-  for (int i = 0; i <= 7; ++i)
-  {
-    digitalWrite(1, HIGH);
-    delay(500);
-    digitalWrite(0, b1.getBit(i));
-    delay(500);
-    digitalWrite(1, LOW);
-    delay(500);
-
-    r1.setBit(i, b1.getBit(i));
-  }
-
-  //r1.setRegister(b1.getRegister());
-  r1.write();
-  delay(9000);
-
+  Interrupts::eventHandler();
+   
+ 
 
 }
 
