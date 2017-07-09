@@ -79,12 +79,14 @@
     <ProjectCapability Include="VisualMicro" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="src\entities\StepperEngine.ino" />
     <None Include="src\iron\Register.ino" />
     <None Include="VSFW.ino">
       <FileType>CppCode</FileType>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\StepperEngine.h" />
     <ClInclude Include="src\Interrupts.h" />
     <ClInclude Include="src\iron\PIN.h" />
     <ClInclude Include="src\iron\QUIT.h" />
