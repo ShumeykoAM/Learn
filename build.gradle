@@ -1,18 +1,22 @@
 apply plugin: 'java'
 apply plugin: 'war'
 
-//repositories {
-//    mavenCentral() //Не работает из за какой то лицензии, надо разобраться
-//}
+repositories {
+    //mavenCentral() //Не работает из за лицензии, надо https на http заменить
+    maven {
+        url "http://repo1.maven.org/maven2"
+    }
+}
 
 //Зависимости, зависимости задаются для конфигураций, у гредла по умолчанию несколько конфигураций
 dependencies{
+    compile group: 'org.hibernate', name: 'hibernate-core', version: '5.2.3.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version: '4.2.0.Final'
+    //testCompile group: 'junit', name: 'junit', version: '4.+'
+
     //Для конфигурации testCompile  мы указываем зависимость, для импорта org.junit
     testCompile fileTree(dir: 'src/test/library', include: '*.jar')
 
-    //compile project(':common')
-    
-    // https://mvnrepository.com/artifact/javax.validation/validation-api
     //compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Alpha1'
     compile fileTree(dir:'src/main/library')
     compile fileTree(dir:'src/library')
