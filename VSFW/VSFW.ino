@@ -2,6 +2,7 @@
 #include "src\iron\QUIT.h"
 #include "src\iron\Register.h"
 #include "src\Interrupts.h"
+#include "src\Loopable.h"
 #include "src\entities\StepperEngine.h"
 
 
@@ -20,20 +21,16 @@ StepperEngine inLength(reg2, 4, 5); //Двигатель движения по �
 void setup()
 {
   Interrupts::setup();
-
+  inWidth.rotate(StepperEngine::DIRECTION::LEFT, 360, 3);
+  rotater.rotate(StepperEngine::DIRECTION::RIGHT, 180, 3);
+  inLength.rotate(StepperEngine::DIRECTION::LEFT, 270, 3);
 }
 
 //Рабочий цикл
 void loop()
 {
   Interrupts::eventHandler();
-   
-  rotater.step(StepperEngine::DIRECTION::RIGHT);
-  inLength.step(StepperEngine::DIRECTION::LEFT);
-  delay(10);
-  inLength.step(StepperEngine::DIRECTION::LEFT);
-  delay(10);
-
+  Loopable::loopAll();
 }
 
 

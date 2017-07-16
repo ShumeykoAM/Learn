@@ -1,8 +1,9 @@
 #include "src\entities\StepperEngine.h"
 #include "src\iron\Register.h"
+#include "src\Loopable.h"
 
 StepperEngine::StepperEngine(Register &reg, uint8_t directionBit, uint8_t stepBit)
-  :reg(reg), directionBit(directionBit), stepBit(stepBit)
+  :reg(reg), directionBit(directionBit), stepBit(stepBit), stepAngle(1), restAngle(0), currentDirection(DIRECTION::RIGHT)
 {   }
 
 /**Повернуть на угол
@@ -16,7 +17,9 @@ void StepperEngine::rotate(DIRECTION direction, unsigned int angle, unsigned int
   //if ((double)angle / (double)stepAngle != angle / stepAngle)
   //  throw StepperEngineException();
 
-
+  currentDirection = direction;
+  restAngle = angle;
+  setInterval(1);
 }
 
 //Сделать шаг
@@ -27,4 +30,12 @@ void StepperEngine::step(DIRECTION direction)
   reg.write();
   reg.setBit(stepBit, LOW);
   reg.write();
+}
+
+void StepperEngine::loop()
+{
+  step(currentDirection);
+  restAngle -= stepAngle;
+  if(restAngle != 0)
+    setInterval(10000);
 }
