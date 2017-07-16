@@ -32,6 +32,8 @@ void Loopable::loopAll()
 {
   //Считаем что существует хотябы одна обрабатываемая сущность, иначе вообще нет ни какого смысла
   Loopable *l = firstLoopable;
+  //Проверим: не находится ли система в состоянии ошибки
+  bool isError = ((ErrorLed *)l)->getError() != ErrorLed::ERROR::NONE;
   do
   {
     unsigned long currentTime = micros();
@@ -43,6 +45,8 @@ void Loopable::loopAll()
         l->loop();
       }
     }
+    if (isError)
+      break;
     l = l->nextLoopable;
   } while (l != nullptr);
 }

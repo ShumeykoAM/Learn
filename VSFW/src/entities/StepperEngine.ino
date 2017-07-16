@@ -1,6 +1,7 @@
 #include "src\entities\StepperEngine.h"
 #include "src\iron\Register.h"
 #include "src\Loopable.h"
+#include "src\entities\AllEntities.h"
 
 StepperEngine::StepperEngine(Register &reg, uint8_t directionBit, uint8_t stepBit)
   :reg(reg), directionBit(directionBit), stepBit(stepBit), stepAngle(1), restAngle(0), currentDirection(DIRECTION::RIGHT)
@@ -14,8 +15,9 @@ StepperEngine::StepperEngine(Register &reg, uint8_t directionBit, uint8_t stepBi
 */
 void StepperEngine::rotate(DIRECTION direction, unsigned int angle, unsigned int speed)
 {
-  //if ((double)angle / (double)stepAngle != angle / stepAngle)
-  //  throw StepperEngineException();
+  //if ((double)angle / (double)stepAngle != unsigned int(angle / stepAngle))
+  //  return;
+  //errorLed.setError(ErrorLed::ERROR::E_STEPPER_ENGINE);
 
   currentDirection = direction;
   restAngle = angle;

@@ -87,6 +87,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entities\AllEntities.h" />
+    <ClInclude Include="src\entities\ErrorLed.h" />
     <ClInclude Include="src\entities\StepperEngine.h" />
     <ClInclude Include="src\Interrupts.h" />
     <ClInclude Include="src\iron\PIN.h" />
@@ -96,6 +98,7 @@
     <ClInclude Include="__vm\.VSFW.vsarduino.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\entities\ErrorLed.ino" />
     <ClCompile Include="src\Interrupts.ino" />
   </ItemGroup>
   <PropertyGroup>
