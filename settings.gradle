@@ -4,3 +4,4 @@ rootProject.name = 'RootProject'
 
 include ':ModuleOne'
 include ':ModuleTwo'
+include ':ModuleWeb'

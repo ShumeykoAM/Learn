@@ -1,0 +1,13 @@
+1 Создаем сервер с именем LearnGradle
+    команда bin\server.bat create LearnGradle
+  Сервер готов к запуску, из консоли запускаем и останавливаем так:
+    bin\server.bat start LearnGradle
+    bin\server.bat stop LearnGradle
+  Помещать war ники ear ники и jar ники надо в папку:
+    usr\servers\LearnGradle\dropins
+  Посмотреть что развернулось а что не развернулось можно здесь:
+    usr\servers\LearnGradle\logs\messages.log и в других файлах лога
+
+2 Правим файл usr\servers\LearnGradle\server.xml (там много чего можно настроить, в т.ч. настроить внешнюю папку где искать варники, надо будет потом разобраться)
+    меняем на такой httpEndpoint:
+        <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="8889" httpsPort="9443" />

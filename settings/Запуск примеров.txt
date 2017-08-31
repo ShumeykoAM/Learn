@@ -1,0 +1,2 @@
+Пример запуска сервлета
+    http://localhost:8889/ModuleWeb/example/SimpleServlet

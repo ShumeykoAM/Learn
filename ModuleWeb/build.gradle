@@ -1,0 +1,29 @@
+dependencies {
+	providedCompile 'javax.servlet:servlet-api:2.4'
+	compile project(":ModuleTwo")
+	
+}
+
+build.doLast {
+	if ( System.getenv('LIBERTY_HOME') == null) {
+		println("WARNING: Deployment is not possible, cause not set environment variable LIBERTY_HOME")
+	}else{
+		copy {
+			from('build/libs/ModuleWeb.war')
+			into("${System.env.LIBERTY_HOME}${File.separator}usr${File.separator}servers${File.separator}${ServerName}${File.separator}dropins")
+		}
+
+		//TODO Пример использования командной строки в разных ОС
+		//workingDir "${System.env.GLASSFISH_HOME}${File.separator}bin"
+		//if (System.properties['os.name'].toLowerCase().contains('windows')) {
+		//	commandLine 'cmd', '/c', 'asadmin.bat'
+		//} else {
+		//	commandLine "./asadmin"
+		//}
+		//args "deploy", "--force=true", "${war.archivePath}"
+
+		//TODO Пример открытия браузера
+		//java.awt.Desktop.desktop.browse "http://localhost:8080/myserver".toURI()
+		
+	}
+}
