@@ -2,6 +2,10 @@ package com.example;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.jms.*;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,6 +37,28 @@ public class SimpleServlet extends HttpServlet
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		out.println("<h1>" + message + "</h1>");
+
+		//https://www.journaldev.com/9906/jms1-1-with-eclipse-and-jboss6-example
+		try
+		{
+			Context context = new InitialContext();
+			ConnectionFactory factory = (ConnectionFactory) context.lookup("jndi_JMS_BASE_QCF");
+			Destination queue = (Destination)context.lookup("jndi_INPUT_Q");
+			Connection connection = factory.createConnection();
+			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			MessageConsumer consumer = session.createConsumer(queue);
+			connection.start();
+
+			int fff = 0;
+		}
+		catch (NamingException e)
+		{
+			e.printStackTrace();
+		}
+		catch (JMSException e)
+		{
+			e.printStackTrace();
+		}
 	}
 
 	public void destroy()
