@@ -1,5 +1,7 @@
 dependencies {
 	providedCompile 'javax.servlet:servlet-api:2.4'
+	providedCompile 'com.sun.messaging.mq:imq:4.6-b01'
+	providedCompile 'javax.jms:jms-api:1.1-rev-1'
 	compile project(":ModuleTwo")
 	
 }
