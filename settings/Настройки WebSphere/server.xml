@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><server description="new server">
+<?xml version="1.0" encoding="UTF-8"?>
+<server description="new server">
   <!-- Enable features -->
   <featureManager>
     <feature>adminCenter-1.0</feature>
@@ -6,13 +7,28 @@
     <feature>jndi-1.0</feature>
     <feature>wasJmsClient-1.1</feature>
     <feature>wasJmsServer-1.0</feature>
+    <feature>jmsMdb-3.1</feature>
+
+    <feature>jsp-2.2</feature>
+    <feature>servlet-3.0</feature>
+    <feature>jca-1.6</feature>
+    <feature>monitor-1.0</feature>
+
 
   </featureManager>
   <!-- Define the host name for use by the collective.
-		If the host name needs to be changed, the server should be
-		removed from the collective and re-joined. -->
+        If the host name needs to be changed, the server should be
+        removed from the collective and re-joined. -->
   <variable name="defaultHostName" value="localhost"/>
   <variable name="wmqJmsClient.rar.location" value="/path/to/wmq/rar/wmq.jmsra.rar"/>
+
+  <!-- Automatically expand WAR files and EAR files -->
+  <applicationManager autoExpand="true" />
+  <!-- Controlling dynamic updates
+  polled The runtime environment scans the server.xml file for changes using the timing interval specified by the monitorInterval property.
+  mbean The runtime environment only looks for updates when prompted to do so through a call to an MBean. This is the mode that is used by the developer tools to update the server.xml file, unless you override it.
+  disabled The updates are not dynamically applied.-->
+  <applicationMonitor updateTrigger="mbean" />
 
   <!-- Define an Administrator and non-Administrator -->
   <basicRegistry id="basic">
@@ -32,28 +48,30 @@
   <applicationMonitor updateTrigger="mbean"/>
 
 
-  <!--Messaging-->
   <messagingEngine>
-    <queue id="QUEUE1"> </queue>
+    <queue id="JMSListenerQ"></queue>
   </messagingEngine>
   <wasJmsEndpoint id="InboundJmsEndpoint"
                   host="*"
                   wasJmsPort="7276"
                   wasJmsSSLPort="9100">
   </wasJmsEndpoint>
-  <jmsQueueConnectionFactory jndiName="jndi_JMS_BASE_QCF">
-    <properties.wasJms remoteServerAddress="localhost:7276:BootStrapBasicMessaging" />
+  <jmsQueueConnectionFactory jndiName="jms/example/JMSListenerCF">
+    <properties.wasJms remoteServerAddress="localhost:7276:BootStrapBasicMessaging"/>
   </jmsQueueConnectionFactory>
-  <jmsQueue jndiName="jndi_INPUT_Q">
-    <properties.wasJms queueName="QUEUE1" />
+  <jmsQueue id="jms/example/JMSListenerQ" jndiName="jms/example/JMSListenerQ">
+    <properties.wasJms queueName="JMSListenerQ"/>
   </jmsQueue>
 
-  <jmsTopicConnectionFactory jndiName="eis/tcf">
-    <properties.wasJms clientID="defaultID" />
-  </jmsTopicConnectionFactory>
-  <jmsTopic jndiName="eis/topic1">
-    <properties.wasJms topicName="Football" />
-  </jmsTopic>
+  <!--  <jmsTopicConnectionFactory jndiName="eis/tcf">
+      <properties.wasJms clientID="defaultID" />
+    </jmsTopicConnectionFactory>
+    <jmsTopic jndiName="eis/topic1">
+      <properties.wasJms topicName="Football" />
+    </jmsTopic>-->
 
+  <jmsActivationSpec id="jms/example/JMSListener">
+    <properties.wasJms destinationRef="jms/example/JMSListenerQ"/>
+  </jmsActivationSpec>
 
 </server>

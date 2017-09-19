@@ -1,7 +1,12 @@
+//TODO для задания своей структуры в проекте надо использовать sourceSets {...
+
 dependencies {
 	providedCompile 'javax.servlet:servlet-api:2.4'
+	providedCompile 'javax.ejb:javax.ejb-api:3.2'
+	providedCompile 'javax.jms:javax.jms-api:2.0'
+
 	compile project(":ModuleTwo")
-	
+
 }
 
 build.doLast {
