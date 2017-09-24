@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.ibm.ejs.models.base.bindings.ejbbnd:EJBJarBinding
+        xmi:version="2.0"
+        xmlns:xmi="http://www.omg.org/XMI"
+        xmlns:com.ibm.ejs.models.base.bindings.commonbnd="commonbnd.xmi"
+        xmlns:com.ibm.ejs.models.base.bindings.ejbbnd="ejbbnd.xmi"
+        xmlns:org.eclipse.jst.j2ee.ejb="ejb.xmi">
+
+    <defaultDatasource>
+        <defaultAuth xmi:type="com.ibm.ejs.models.base.bindings.commonbnd:BasicAuthData"/>
+    </defaultDatasource>
+
+    <ejbJar href="META-INF/ejb-jar.xml#EJBJar_JMSListener"/>
+
+    <ejbBindings xmi:type="com.ibm.ejs.models.base.bindings.ejbbnd:MessageDrivenBeanBinding" xmi:id="MessageDrivenBeanBinding_1380793721519" activationSpecJndiName="jms/example/JMSListener">
+
+        <enterpriseBean xmi:type="org.eclipse.jst.j2ee.ejb:MessageDriven"
+                        href="META-INF/ejb-jar.xml#MessageDriver_JMSListener"/>
+
+    </ejbBindings>
+
+    <defaultCMPConnectionFactory/>
+</com.ibm.ejs.models.base.bindings.ejbbnd:EJBJarBinding>

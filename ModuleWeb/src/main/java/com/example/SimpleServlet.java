@@ -42,13 +42,15 @@ public class SimpleServlet extends HttpServlet
 		try
 		{
 			Context context = new InitialContext();
-			ConnectionFactory factory = (ConnectionFactory) context.lookup("jndi_JMS_BASE_QCF");
-			Destination queue = (Destination)context.lookup("jndi_INPUT_Q");
+			ConnectionFactory factory = (ConnectionFactory) context.lookup("jms/example/JMSListenerCF");
+			Destination queue = (Destination)context.lookup("jms/example/JMSListenerQ");
 			Connection connection = factory.createConnection();
-			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-			MessageConsumer consumer = session.createConsumer(queue);
 			connection.start();
-
+			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			MessageProducer producer = session.createProducer(queue);
+			Message message = session.createMessage();
+			message.setStringProperty("sfdfdsfsdf", "fdsfsdfsdfsd");
+			producer.send(message);
 			int fff = 0;
 		}
 		catch (NamingException e)

@@ -12,8 +12,12 @@ task autoDeployGlassFish(dependsOn: 'build'){
 		println("WARNING: Deployment is not possible, cause not set environment variable GLASSFISH_HOME")
 	}else{
 		copy {
-			from("${war.archivePath}")
-			into("${System.env.GLASSFISH_HOME}${File.separator}glassfish${File.separator}domains${File.separator}${DomainName}${File.separator}autodeploy")
+			def fromPath = "${war.archivePath}"
+			def intoPath = "${System.env.GLASSFISH_HOME}${File.separator}glassfish${File.separator}domains${File.separator}${DomainName}${File.separator}autodeploy"
+			println(fromPath)
+			println(intoPath)
+			from(fromPath)
+			into(intoPath)
 		}
 	}
 }
