@@ -1,2 +1,3 @@
 переменная                   значение
 LIBERTY_HOME                 Путь к папке с WebSphere
+GLASSFISH_HOME               Путь к папке с GlassFish

@@ -7,23 +7,38 @@ dependencies {
 	
 }
 
-task autoDeployGlassFish(dependsOn: 'build'){
-	if (System.getenv('GLASSFISH_HOME') == null){
-		println("WARNING: Deployment is not possible, cause not set environment variable GLASSFISH_HOME")
+//Деплой на либерти
+build.doLast {
+	if ( System.getenv('LIBERTY_HOME') == null) {
+		println("WARNING: Deployment in Liberty is not possible, cause not set environment variable LIBERTY_HOME")
 	}else{
 		copy {
-			def fromPath = "${war.archivePath}"
-			def intoPath = "${System.env.GLASSFISH_HOME}${File.separator}glassfish${File.separator}domains${File.separator}${DomainName}${File.separator}autodeploy"
-			println(fromPath)
-			println(intoPath)
-			from(fromPath)
-			into(intoPath)
+			from("${war.archivePath}")
+			into("${System.env.LIBERTY_HOME}${File.separator}usr${File.separator}servers${File.separator}${ServerName}${File.separator}dropins")
 		}
 	}
 }
 
+//Деплой на GlassFish
+task autoDeployGlassFish(dependsOn: 'build'){
+	doLast{
+		if (System.getenv('GLASSFISH_HOME') == null){
+			println("WARNING: Deployment in GlassFish is not possible, cause not set environment variable GLASSFISH_HOME")
+		}else{
+			copy {
+				def fromPath = "${war.archivePath}"
+				def intoPath = "${System.env.GLASSFISH_HOME}${File.separator}glassfish${File.separator}domains${File.separator}${DomainName}${File.separator}autodeploy"
+				println(fromPath)
+				println(intoPath)
+				from(fromPath)
+				into(intoPath)
+			}
+		}
+	}
+}
 
-task deployGlassFish(/*dependsOn: 'build',*/ type:Exec){
+//Этот деплой на GlassFish работает только когда сервак уже запущен, так что он для нас бесполезен, оставил как пример работы с командной строкой
+task deployGlassFish(dependsOn: 'build', type:Exec){
 	if (System.getenv('GLASSFISH_HOME') == null){
 		println("WARNING: Deployment is not possible, cause not set environment variable GLASSFISH_HOME")
 		enabled = false //Отключим таск, он не будет выполняться (doFist и doLast)
