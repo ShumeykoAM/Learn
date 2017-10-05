@@ -42,14 +42,19 @@ public class SimpleServlet extends HttpServlet
 		try
 		{
 			Context context = new InitialContext();
-			ConnectionFactory factory = (ConnectionFactory) context.lookup("jms/example/JMSListenerCF");
-			Destination queue = (Destination)context.lookup("jms/example/JMSListenerQ");
+			
+			//Когда запущен сервак glassfish нужно выполнить команды, что бы добавить фабрику и очередь на сервак, потом их можно лукапить и использовать
+			//asadmin create-jms-resource --restype javax.jms.ConnectionFactory com.example.jms.ConnectionFactory
+			ConnectionFactory factory = (ConnectionFactory) context.lookup("com.example.jms.ConnectionFactory");
+			//asadmin create-jms-resource --restype javax.jms.Queue com.example.jms.MyQueue
+			Destination queue = (Destination)context.lookup("com.example.jms.MyQueue");
+
 			Connection connection = factory.createConnection();
 			connection.start();
 			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 			MessageProducer producer = session.createProducer(queue);
 			Message message = session.createMessage();
-			message.setStringProperty("sfdfdsfsdf", "fdsfsdfsdfsd");
+			message.setStringProperty("param1", "value_for_param");
 			producer.send(message);
 			int fff = 0;
 		}
