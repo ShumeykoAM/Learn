@@ -1,12 +1,16 @@
 package com.example;
 
+import com.example.ejb.SimpleSingleton;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.jms.*;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +22,14 @@ import javax.servlet.http.HttpServletResponse;
  * @ $Revision$
  */
 
+@WebServlet("/example/SimpleServlet")
 public class SimpleServlet extends HttpServlet
 {
 	private String message;
+
+	@EJB
+	SimpleSingleton simpleSingleton;
+	
 
 	public void init() throws ServletException
 	{
