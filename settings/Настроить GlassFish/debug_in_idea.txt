@@ -1,0 +1,5 @@
+Находим в glassfish файлы:
+    glassfish\domains\(домен который запускаем)\config\domain.xml
+    glassfish\domains\(домен который запускаем)\config\domain.jvm-options-IDEA.xml
+и в строках содержащих "debug-options" выставляем параметр server=n, возможно еще с параметром suspend надо будет поколдовать.
+В них же и порты, используемые для отладки, можно подправить
