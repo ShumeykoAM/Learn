@@ -1,4 +1,4 @@
-package com.example.ejb;
+package com.example.ejb_jms;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -15,16 +15,22 @@ import javax.ejb.Startup;
 @Singleton
 public class SimpleSingleton
 {
+	private String commonField;
+
+	public String getCommonField()
+	{
+		return commonField;
+	}
 
 	@PostConstruct
-	public void construct()
+	private void construct()
 	{
-
+		commonField = "Any common resource";
 	}
 
 	@PreDestroy
-	public void destruct()
+	private void destruct()
 	{
-
+		commonField = null;
 	}
 }

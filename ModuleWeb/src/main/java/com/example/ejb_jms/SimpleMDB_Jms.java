@@ -1,4 +1,4 @@
-package com.example.ejb;
+package com.example.ejb_jms;
 
 import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
@@ -12,14 +12,14 @@ import javax.jms.MessageListener;
  * @ $Revision$
  */
 @MessageDriven(mappedName = "com.example.jms.MyQueue")
-public class MDBExample implements MessageListener
+public class SimpleMDB_Jms implements MessageListener
 {
 	@Override public void onMessage(Message message)
 	{
 		try
 		{
-			String value = message.getStringProperty("param1");
-			System.out.println(value);
+			int count = Integer.parseInt(message.getStringProperty("count"));
+			System.out.println(count);
 		}
 		catch (JMSException e)
 		{
