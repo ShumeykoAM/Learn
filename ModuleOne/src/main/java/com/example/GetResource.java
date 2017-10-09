@@ -45,7 +45,7 @@ public class GetResource
 	public static void main(String[] args)
 	{
 		//Если имя ресурса НЕ начинается с "/", как в примере ниже, это значит что поиск ресурса будет происходить по относительному пути,
-		// к classpath или r корню jar ника прибавиться имя пакета класса, чей Class мы получили, плюс имя ресурса
+		// к classpath или к корню jar ника прибавиться имя пакета класса, чей Class мы получили, плюс имя ресурса
 		System.out.println("File1: " + getResource("resource.txt"));
 		System.out.println("File2: " + getResource("subdir/resource.txt"));
 
