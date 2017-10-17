@@ -1,16 +1,15 @@
 buildscript {
-  ext {
-    springBootVersion = '1.5.7.RELEASE'
-  }
-  repositories {
-    //mavenCentral() //Не работает из за лицензии, надо https на http заменить
-    maven {
-      url "http://repo1.maven.org/maven2"
-    }
-  }
-  dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-  }
+	ext {
+		springBootVersion = '1.5.7.RELEASE'
+	}
+	repositories {
+		maven {
+			url "http://repo1.maven.org/maven2"
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
 }
 
 apply plugin: 'java'
@@ -23,15 +22,15 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
-  //mavenCentral() //Не работает из за лицензии, надо https на http заменить
-  maven {
-    url "http://repo1.maven.org/maven2"
-  }
+	maven {
+		url "http://repo1.maven.org/maven2"
+	}
 }
 
-
 dependencies {
-  compile("org.springframework.boot:spring-boot-starter-web:1.1.8.RELEASE")
-  compile('org.springframework.boot:spring-boot-starter')
-  testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-devtools')
+	compile("org.springframework.boot:spring-boot-starter-web:1.1.8.RELEASE")
+	compile("org.springframework.boot:spring-boot-starter-jetty")
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
