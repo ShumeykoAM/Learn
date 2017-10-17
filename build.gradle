@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.7.RELEASE'
+		springBootVersion = '1.5.8.RELEASE'
 	}
 	repositories {
 		maven {
@@ -33,8 +33,10 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
+	compile("org.springframework.boot:spring-boot-starter-web")	
 	compile('org.springframework.boot:spring-boot-devtools')
-	compile("org.springframework.boot:spring-boot-starter-web:1.1.8.RELEASE")
 	compile("org.springframework.boot:spring-boot-starter-jetty")
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
