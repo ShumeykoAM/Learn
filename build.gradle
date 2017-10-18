@@ -1,10 +1,10 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.7.RELEASE'
+		springBootVersion = '1.5.8.RELEASE'
 	}
 	repositories {
 		maven {
-			url "http://repo1.maven.org/maven2"
+			url 'http://repo1.maven.org/maven2'
 		}
 	}
 	dependencies {
@@ -13,7 +13,7 @@ buildscript {
 }
 
 apply plugin: 'java'
-apply plugin: "idea"
+apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 
@@ -21,20 +21,19 @@ jar {
 	baseName = 'ESA2'
 }
 
-group = 'com.auth.front'
+group = 'sbrf.esa2.autnnz'
 version = '0.0.1'
 sourceCompatibility = 1.8
 
 repositories {
 	maven {
-		url "http://repo1.maven.org/maven2"
+		url 'http://repo1.maven.org/maven2'
 	}
 }
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-devtools')
-	compile("org.springframework.boot:spring-boot-starter-web:1.1.8.RELEASE")
-	compile("org.springframework.boot:spring-boot-starter-jetty")
+	compile('org.springframework.boot:spring-boot-starter-jetty')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
