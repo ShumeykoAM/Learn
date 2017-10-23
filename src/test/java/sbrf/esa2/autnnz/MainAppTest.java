@@ -2,7 +2,9 @@ package sbrf.esa2.autnnz;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -13,19 +15,21 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @ $Author$
  * @ $Revision$
  */
+
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MainAppTest
 {
-	@RunWith(SpringRunner.class)
-	@SpringBootTest
-	public class DemoApplicationTests
+	@Autowired
+	private TestRestTemplate restTemplate;
+
+	/**
+	 * Тест страницы Hello World SpringBoot!
+	 */
+	@Test
+	public void helloWorldTest()
 	{
-		/**
-		 * TODO
-		 */
-		@Test
-		public void contextLoads()
-		{
-			
-		}
+		String body = this.restTemplate.getForObject("/", String.class);
+		org.junit.Assert.assertEquals("Hello World SpringBoot!", body);
 	}
 }
