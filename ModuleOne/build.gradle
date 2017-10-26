@@ -4,6 +4,8 @@ mainClassName = "com.example.Main"
 
 dependencies {
 	compile project(":ModuleTwo")
+	compile fileTree(include: 'sqlite-jdbc-3.16.1.jar', dir:'src/library/jdbc') //Для JDBC SQLite, либу sqlite нужно таскать с собой, по этому с удаленного репозитория качать не будем
+	//providedCompile 'com.oracle:ojdbc6:11.2.0'
 }
 
 jar {
