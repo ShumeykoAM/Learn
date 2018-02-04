@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonSerializer;
-import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,19 +28,44 @@ public class HelloController
 	}*/
 
 	@RequestMapping(value = {"/", "/hell"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Book welcomePage(@Valid @RequestBody Book p1, BindingResult result)
+	@ResponseBody
+	public Book welcomePage(@Valid @RequestBody Book p1, BindingResult result)
 	{
 
 		return new Book("dd", 34);
 	}
 
-
-	/*@RequestMapping("/hello")
-	public String hello(Map<String, Object> model)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	@Order
+	@ResponseBody
+	public Book workEx(HttpMessageNotReadableException ex)
 	{
-		//model.addAttribute("name", name);
-		return "hello";
-	}*/
+		try
+		{
+			JsonMappingException mappingException = (JsonMappingException) ex.getCause();
+			String fieldName = mappingException.getPath().get(0).getFieldName();
+			return new Book("Ошибка параметра " + fieldName, 0);
+		}
+		catch (Exception e)
+		{
+			return getCommonFailure();
+		}
+	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(Exception.class)
+	@Order
+	@ResponseBody
+	public Book workEx(Exception ex)
+	{
+		return getCommonFailure();
+	}
+
+	private Book getCommonFailure()
+	{
+		return new Book("Общий сбой!", 305);
+	}
 
 	public static class Book
 	{
@@ -88,7 +113,16 @@ public class HelloController
 			@Override
 			public Integer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException
 			{
-				return Integer.parseInt(p.getText());
+				Integer result = null;
+				try
+				{
+					result = Integer.parseInt(p.getText());
+				}
+				catch (NumberFormatException ex)
+				{
+					ctxt.reportMappingException("Тут брозается исключение дальше и перехват произойдет в @ExceptionHandler!");
+				}
+				return result;
 			}
 		}
 
