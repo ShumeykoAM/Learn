@@ -7,6 +7,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.hellokoding.springboot.validator.CorrectDate;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Calendar;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -32,7 +34,7 @@ public class HelloController
 	public Book welcomePage(@Valid @RequestBody Book p1, BindingResult result)
 	{
 
-		return new Book("dd", 34);
+		return new Book("dd", 34, Calendar.getInstance());
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -45,7 +47,7 @@ public class HelloController
 		{
 			JsonMappingException mappingException = (JsonMappingException) ex.getCause();
 			String fieldName = mappingException.getPath().get(0).getFieldName();
-			return new Book("Ошибка параметра " + fieldName, 0);
+			return new Book("Ошибка параметра " + fieldName, 0, Calendar.getInstance());
 		}
 		catch (Exception e)
 		{
@@ -64,7 +66,7 @@ public class HelloController
 
 	private Book getCommonFailure()
 	{
-		return new Book("Общий сбой!", 305);
+		return new Book("Общий сбой!", 305, Calendar.getInstance());
 	}
 
 	public static class Book
@@ -78,14 +80,18 @@ public class HelloController
 		@JsonDeserialize(using = StringToIntSerializer.class)
 		private Integer code;
 
+		@CorrectDate(dateFormat = "dd.MM.YYYY")
+		private Calendar date;
+
 		public Book()
 		{
 		}
 
-		public Book(String name, Integer code)
+		public Book(String name, Integer code, Calendar date)
 		{
 			this.name = name;
 			this.code = code;
+			this.date = date;
 		}
 
 		public String getName()
@@ -106,6 +112,16 @@ public class HelloController
 		public void setCode(Integer code)
 		{
 			this.code = code;
+		}
+
+		public Calendar getDate()
+		{
+			return date;
+		}
+
+		public void setDate(Calendar date)
+		{
+			this.date = date;
 		}
 
 		public static class StringToIntSerializer extends JsonDeserializer<Integer>
