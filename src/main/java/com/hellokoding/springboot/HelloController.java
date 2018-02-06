@@ -8,11 +8,12 @@ import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import javax.validation.Valid;
@@ -29,10 +30,10 @@ public class HelloController
 
 	@RequestMapping(value = {"/", "/hell"}, method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public Book welcomePage(@Valid @RequestBody Book p1, BindingResult result)
+	public ResponseEntity<Book> welcomePage(@Valid @RequestBody Book p1, BindingResult result)
 	{
-
-		return new Book("dd", 34);
+		//return new ResponseEntity<Book>(new Book("dd", 34), HttpStatus.OK);
+		return new ResponseEntity<Book>(new Book("dd", 34), HttpStatus.BAD_REQUEST);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -135,4 +136,39 @@ public class HelloController
 			}
 		}
 	}
+
+	public static void main(String args[])
+	{
+		RestTemplate restTemplate = new RestTemplate();
+		try
+		{
+			Book book = new Book();
+			book.setName("имя");
+			book.setCode(12345);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+			HttpEntity<Book> entity = new HttpEntity<Book>(book, headers);
+			ResponseEntity<Book> response = restTemplate.postForEntity("http://localhost:8080/hell", entity, Book.class);
+			//Можно и так ResponseEntity<Book> response = restTemplate.exchange("http://localhost:8080/hell", HttpMethod.POST, entity, Book.class);
+			book = response.getBody();
+			response = null;
+		}
+		catch (HttpClientErrorException ex)
+		{
+			try
+			{
+				ObjectMapper mapper = new ObjectMapper();
+				Book book = null;
+				book = mapper.readValue(ex.getResponseBodyAsString(), Book.class);
+				book = null;
+			}
+			catch (IOException e)
+			{
+				int ffff = 0;
+			}
+
+		}
+	}
+
 }
