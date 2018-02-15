@@ -1,5 +1,9 @@
 package com.example.rest.validator;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
@@ -25,8 +29,18 @@ public class CorrectDateValidator implements ConstraintValidator<CorrectDate, St
 	{
 		if (value != null)
 		{
-			return true; //Проверяем что value подходит под бизнеслогику
+			try
+			{
+				DateFormat df = new SimpleDateFormat(dateFormat);
+				Date date = df.parse(value);
+				//TODO тут надо из получившейся даты формат вынуть и сравнить или как то так
+				return true;
+			}
+			catch (ParseException e)
+			{
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 }

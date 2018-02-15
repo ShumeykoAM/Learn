@@ -25,16 +25,16 @@ public class JsonRequest
 	@JsonDeserialize(using = StringToBooleanDeserialize.class)
 	private Boolean isDeserializable;
 
-	@NotNull
-	@Pattern(regexp = "^35$|^44$")
+	@NotNull(message = "Нужен обязательный параметр")
+	@Pattern(regexp = "^35$|^44$", message = "Параметр задан неверно")
 	private String expression;
 
-	@NotNull
-	@CorrectDate(dateFormat = "dd.MM.YYYY")
+	@NotNull(message = "Нужен обязательный параметр")
+	@CorrectDate(dateFormat = "dd.MM.YYYY", message = "Параметр задан неверно")
 	private String dateIn;
 
-	@NotNull
-	@CorrectDate(dateFormat = "YYYY.MM.dd")
+	@NotNull(message = "Нужен обязательный параметр")
+	@CorrectDate(dateFormat = "YYYY.MM.dd", message = "Параметр задан неверно")
 	private String dateOut;
 
 	public String getName()
