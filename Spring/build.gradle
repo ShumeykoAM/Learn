@@ -1,15 +1,12 @@
 buildscript {
 	ext {
 		springBootVersion = '1.5.8.RELEASE'
-		//tarantoolConnectorVersion = '1.7.4'
-		//girdGainVersion = '2.2.0'
 	}
 	repositories {
 		jcenter()
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		//classpath("org.tarantool:connector:${tarantoolConnectorVersion}")
 	}
 }
 
@@ -28,12 +25,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-devtools')
 	compile('org.springframework.boot:spring-boot-starter-undertow')
-
 	compile "com.google.guava:guava:16+"
-	//compile(group: 'org.tarantool', name: 'connector', version: '1.7.4')
-	//compile(group: 'org.apache.ignite', name: 'ignite-core', version: girdGainVersion)
-	//compile(group: 'org.apache.ignite', name: 'ignite-spring', version: girdGainVersion)
-	//compile(group: 'org.apache.ignite', name: 'ignite-indexing', version: girdGainVersion)
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
