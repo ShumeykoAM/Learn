@@ -1,5 +1,6 @@
 package com.learn;
 
+import com.learn.scheduler.MyJob;
 import com.tools.logger.Log;
 import com.tools.logger.UncaughtExceptionHandler;
 import org.springframework.boot.SpringApplication;
@@ -33,5 +34,6 @@ public class MainApp
 		List<String> lArgs = new LinkedList<>(Arrays.asList(args));
 		args = lArgs.toArray(args);
 		SpringApplication.run(MainApp.class, args);
+		MyJob.runScheduler();
 	}
 }
