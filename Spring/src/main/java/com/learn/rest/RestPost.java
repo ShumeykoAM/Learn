@@ -35,28 +35,46 @@ public class RestPost
 	@ResponseBody
 	public ResponseEntity<String> restPost(@Valid @RequestBody String request, HttpServletRequest httpRequest)
 	{
+		request += "\n\n\n POST ";
+		calcFullRequest(request, httpRequest);
+		return new ResponseEntity<String>("", HttpStatus.OK);
+	}
+
+	/**
+	 * Сюда можно слать любые POST запросы
+	 * @param request
+	 * @param httpRequest
+	 * @return
+	 */
+	@RequestMapping(value = {"/rest/put"}, method = RequestMethod.PUT)
+	@ResponseBody
+	public ResponseEntity<String> restGet(@Valid @RequestBody String request, HttpServletRequest httpRequest)
+	{
+		request += "\n\n\n PUT ";
+		calcFullRequest(request, httpRequest);
+		return new ResponseEntity<String>("", HttpStatus.OK);
+	}
+
+	String calcFullRequest(String request, HttpServletRequest httpRequest)
+	{
 		List<String> headers = new ArrayList<>();
-		try
+		Enumeration<String> headerNames = httpRequest.getHeaderNames();
+		do
 		{
-			Enumeration<String> headerNames = httpRequest.getHeaderNames();
-			do
-			{
-				String headerName = headerNames.nextElement();
-				headers.add("name:     " + headerName + "\n  value:  " + httpRequest.getHeader(headerName));
-			}
-			while (true);
+			String headerName = headerNames.nextElement();
+			headers.add("name:     " + headerName + "\n  value:  " + httpRequest.getHeader(headerName));
 		}
-		catch (NoSuchElementException e){   }
+		while (headerNames.hasMoreElements());
 		request += "\n\n\n" + Joiner.on('\n').join(headers);
 		requests.add(request);
-		return new ResponseEntity<String>("", HttpStatus.OK);
+		return request;
 	}
 
 	/**
 	 * Можно получить количество полученных запросов выше
 	 * @return
 	 */
-	@RequestMapping(value = {"/rest/post/count"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/rest/count"}, method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<String> restPostCount()
 	{
@@ -66,12 +84,11 @@ public class RestPost
 	/**
 	 * Можно получить запрос полученный ранее в обработчике restPost, указав индекс (начинается с 0)
 	 * @param request
-	 * @param result
 	 * @return
 	 */
-	@RequestMapping(value = {"/rest/post/pull"}, method = RequestMethod.POST)
+	@RequestMapping(value = "/rest/pull/{id}", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<String> restPostPull(@Valid @RequestBody Integer request, BindingResult result)
+	public ResponseEntity<String> getFoosBySimplePathWithPathVariable(@PathVariable("id") int request)
 	{
 		String s = "Наверное запросов еще не было, или какая то другая ошибка.";
 		try
