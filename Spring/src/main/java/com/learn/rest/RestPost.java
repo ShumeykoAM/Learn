@@ -3,13 +3,11 @@ package com.learn.rest;
 import com.google.common.base.Joiner;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.NoSuchElementException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -31,7 +29,7 @@ public class RestPost
 	 * @param httpRequest
 	 * @return
 	 */
-	@RequestMapping(value = {"/rest/post"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/rest/post", "/rest/post/service/dss/v1/DSSResultOfConfirmOperation"}, method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<String> restPost(@Valid @RequestBody String request, HttpServletRequest httpRequest)
 	{
