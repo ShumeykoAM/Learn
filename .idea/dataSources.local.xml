@@ -2,11 +2,15 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="Sqlite (Xerial) - db_first.db" uuid="c8a25fd1-84d3-442b-b9f5-beedffb15fc9">
-      <database-info product="SQLite" version="3.8.11" jdbc-version="2.1" driver-name="SQLiteJDBC" driver-version="native" />
+      <database-info product="SQLite" version="3.23.1" jdbc-version="2.1" driver-name="SQLite JDBC" driver-version="3.23.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
       <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
       <secret-storage>master_key</secret-storage>
       <auth-required>false</auth-required>
+      <introspection-schemas>*:</introspection-schemas>
       <resolve-scope>:*</resolve-scope>
+      <unqualified-resolve-schemas>:*</unqualified-resolve-schemas>
     </data-source>
   </component>
 </project>

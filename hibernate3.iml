@@ -6,7 +6,9 @@
         <datasource-map>
           <unit-entry name="hibernate.cfg.xml" value="c8a25fd1-84d3-442b-b9f5-beedffb15fc9" />
         </datasource-map>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="hibernate.cfg.xml" />
+        </naming-strategy-map>
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/hibernate.cfg.xml" />
       </configuration>
     </facet>
@@ -42,6 +44,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="sqlite-jdbc-3.6.20.1" level="project" />
+    <orderEntry type="library" name="sqlite-jdbc-3.23.1" level="project" />
   </component>
 </module>
