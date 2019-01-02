@@ -5,6 +5,8 @@ import com.tools.logger.Log;
 import com.tools.logger.UncaughtExceptionHandler;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -19,7 +21,7 @@ import java.util.List;
  * @ $Revision$
  */
 @SpringBootApplication
-public class MainApp
+public class MainApp extends SpringBootServletInitializer
 {
 	public static final UncaughtExceptionHandler uncaughtExceptionHandler = new UncaughtExceptionHandler();
 	private static final Log LOG = new Log(MainApp.class);
