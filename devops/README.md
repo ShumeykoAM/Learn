@@ -4,3 +4,5 @@
 Находясь в папке devops
     для сборки проекта нужно запустить на исполнение файл distr-build.cmd или distr-build.sh для Windows или Linux соответственно
     для запуска автоматических тестов нужно запустить на исполнение файл test-run.cmd или test-run.sh для Windows или Linux соответственно
+
+Для запуска из idea нужно создать конфигурацию запуска JAR указать в ней war из папки build/libs, а в Before launch указать gradle:build

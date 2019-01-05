@@ -18,15 +18,15 @@ jar {
 }
 
 group = 'com.learn'
-version = '0.0.2'
+version = '0.0.3'
 archivesBaseName = 'MySpring'
 
 dependencies {
+	compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper', version: '9.0.14'
+	compile group: 'javax.servlet', name: 'jstl', version: '1.2'
 	compile('org.springframework.boot:spring-boot-starter-web:2.0.2.RELEASE')
 	compile('org.springframework.boot:spring-boot-devtools:2.0.2.RELEASE')
 	compile "com.google.guava:guava:16+"
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: '1.2.1.RELEASE'
-
 	compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.2.1'
 
 	testCompile('org.springframework.boot:spring-boot-starter-test:2.0.2.RELEASE')

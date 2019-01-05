@@ -1,3 +1,3 @@
 cd ..\Spring\build\libs
 
-java -jar MySpring-0.0.2.war
+java -jar MySpring-0.0.3.war
