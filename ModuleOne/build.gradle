@@ -1,0 +1,12 @@
+apply plugin: "application"
+
+mainClassName = "com.example.Main"
+
+jar {
+	manifest.attributes("Main-Class": mainClassName);
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+	testCompile "org.mockito:mockito-core:3.0.0"
+}

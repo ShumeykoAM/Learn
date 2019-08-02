@@ -1,0 +1,23 @@
+### Intellij ###
+
+.ideaDataSources/
+dataSources/
+.idea/
+*.iml
+*.iws
+*.ipr
+*.ids
+
+# Ignore the Eclipse project files and folders
+.classpath
+.project
+.settings
+
+# Ignore the NetBeans project files and folders
+.nb-gradle
+.nb-gradle-properties
+
+### Gradle ###
+
+.gradle
+**/build/
