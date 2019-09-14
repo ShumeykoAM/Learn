@@ -1,2 +1,5 @@
 Пример запуска сервлета
     http://localhost:8080/ModuleWeb/example/SimpleServlet
+
+Запуск сервлета сконфигурированного в web.xml
+    http://localhost:8080/ModuleWeb/example/SimpleServlet/PathInXml
