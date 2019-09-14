@@ -1,0 +1,17 @@
+В файле server.xml настроен центр администрирования, запускаем сервер и заходим по ссылке: https://localhost:9443/adminCenter/, др. доспуные ссылки видны в файле лога сервера.
+Качнуть сервер можно тут: https://developer.ibm.com/wasdev/downloads/download-latest-stable-websphere-liberty-runtime/
+  далее устанавливаем все что нужно:bin/installUtility install adminCenter-1.0 можно всё установить: bin/installUtility install javaee-7.0, можно глянуть что доступно bin/installUtility find
+
+1 Создаем сервер с именем LearnGradle
+    команда bin\server.bat create LearnGradle
+  Сервер готов к запуску, из консоли запускаем и останавливаем так:
+    bin\server.bat start LearnGradle
+    bin\server.bat stop LearnGradle
+  Помещать war ники ear ники и jar ники надо в папку:
+    usr\servers\LearnGradle\dropins
+  Посмотреть что развернулось а что не развернулось можно здесь:
+    usr\servers\LearnGradle\logs\messages.log и в других файлах лога
+
+2 Правим файл usr\servers\LearnGradle\server.xml (там много чего можно настроить, в т.ч. настроить внешнюю папку где искать варники, надо будет потом разобраться)
+    меняем на такой httpEndpoint:
+        <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="8889" httpsPort="9443" />

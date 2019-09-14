@@ -1,0 +1,65 @@
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+}
+
+//Деплой на либерти
+task autoDeployLiberty(dependsOn: 'build'){
+	doLast {
+		if (System.getenv('LIBERTY_HOME') == null)
+		{
+			println("WARNING: Deployment in Liberty is not possible, cause not set environment variable LIBERTY_HOME")
+		}
+		else
+		{
+			copy {
+				from("${war.archivePath}")
+				into("${System.env.LIBERTY_HOME}${File.separator}usr${File.separator}servers${File.separator}${ServerName}${File.separator}dropins")
+			}
+		}
+	}
+}
+
+//Деплой на GlassFish
+task autoDeployGlassFish(dependsOn: 'build'){
+	doLast{
+		if (System.getenv('GLASSFISH_HOME') == null){
+			println("WARNING: Deployment in GlassFish is not possible, cause not set environment variable GLASSFISH_HOME")
+		}else{
+			copy {
+				def fromPath = "${war.archivePath}"
+				def intoPath = "${System.env.GLASSFISH_HOME}${File.separator}glassfish${File.separator}domains${File.separator}${DomainName}${File.separator}autodeploy"
+				println('copy from ' + fromPath)
+				println('copy to ' + intoPath)
+				from(fromPath)
+				into(intoPath)
+			}
+		}
+	}
+}
+
+//Этот деплой на GlassFish работает только когда сервак уже запущен, так что он для нас бесполезен, оставил как пример работы с командной строкой
+task deployGlassFish(dependsOn: 'build', type:Exec){
+	if (System.getenv('GLASSFISH_HOME') == null){
+		println("WARNING: Deployment is not possible, cause not set environment variable GLASSFISH_HOME")
+		enabled = false //Отключим таск, он не будет выполняться (doFist и doLast)
+	}else{
+		//TODO Пример использования командной строки в разных ОС
+		println("${System.env.GLASSFISH_HOME}${File.separator}bin")
+		println("${war.archivePath}")
+		
+		workingDir "${System.env.GLASSFISH_HOME}${File.separator}bin"
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			commandLine 'cmd', '/c', 'asadmin.bat'
+		} else {
+			commandLine "./asadmin"
+		}
+		args "deploy", "--force=true", "${war.archivePath}"
+
+		//TODO Пример открытия браузера
+		//java.awt.Desktop.desktop.browse "http://localhost:8080/myserver".toURI()
+	}
+	
+	/*doLast{
+		java.awt.Desktop.desktop.browse "http://localhost:8080/myserver".toURI()
+	}*/
+}
