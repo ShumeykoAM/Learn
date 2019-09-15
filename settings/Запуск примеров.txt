@@ -3,3 +3,9 @@
 
 Запуск сервлета сконфигурированного в web.xml
     http://localhost:8080/ModuleWeb/example/SimpleServlet/PathInXml
+
+Запуск Rest сервиса
+    POST Json http://localhost:8080/ModuleWeb/spring/rest/simpleJsonService
+    {
+    	"stringParam": "Некий параметр"
+    }
