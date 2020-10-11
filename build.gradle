@@ -1,0 +1,13 @@
+plugins {
+  id 'idea'
+}
+
+task hello {
+  doLast {
+    println 'hello world'
+    4.times { print "$it" }
+    println()
+    println metaClass.getClass().canonicalName
+  }
+}
+//gradlew -q hello
