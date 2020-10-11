@@ -57,12 +57,39 @@ behaviour.configure {
 //gradlew -q behaviour
 
 //Add propety for task properties. Need use 'ext'
-task myTaskWithProperty{
+task myTaskWithProperty {
   ext.myProperty = 'myValue'
 }
-task printTaskProperties{
-  doLast{
+task printTaskProperties {
+  doLast {
     println myTaskWithProperty.myProperty
   }
 }
 //gradlew -q printTaskProperties
+
+
+//On the fly if task already executed then set variable
+//whenReady affects the task before it executed
+task distribution {
+  doLast {
+    println "We build the zip with version=$version"
+  }
+}
+task release {
+  dependsOn 'distribution'
+  doLast {
+    println 'We release now'
+  }
+}
+gradle.taskGraph.whenReady { taskGraph ->
+  if (taskGraph.hasTask(":release"))
+  {
+    version = '1.0'
+  }
+  else
+  {
+    version = '1.0-SNAPSHOT'
+  }
+}
+//gradlew -q distribution
+//gradlew -q release
