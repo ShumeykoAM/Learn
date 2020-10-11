@@ -55,3 +55,14 @@ behaviour.configure {
   }
 }
 //gradlew -q behaviour
+
+//Add propety for task properties. Need use 'ext'
+task myTaskWithProperty{
+  ext.myProperty = 'myValue'
+}
+task printTaskProperties{
+  doLast{
+    println myTaskWithProperty.myProperty
+  }
+}
+//gradlew -q printTaskProperties
