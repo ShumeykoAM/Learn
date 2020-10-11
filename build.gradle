@@ -11,3 +11,47 @@ task hello {
   }
 }
 //gradlew -q hello
+
+//dependency of other task
+task intro {
+  dependsOn hello
+  doLast {
+    println "I'm Gradle"
+  }
+}
+//gradlew -q intro
+
+//Dynamic creation of a task
+4.times { counter ->
+  task "task$counter" {
+    doLast {
+      println "I'm task number $counter"
+    }
+  }
+}
+//gradlew -q task1
+
+//Accessing a task via API - adding a dependency
+task0.dependsOn task2, task3
+//gradlew -q task0
+
+//Accessing a task via API - adding behaviour
+task behaviour {
+  doLast {
+    println 'Hello Earth'
+  }
+}
+behaviour.doFirst {
+  println 'Hello Venus'
+}
+behaviour.configure {
+  doLast {
+    println 'Hello Mars'
+  }
+}
+behaviour.configure {
+  doLast {
+    println 'Hello Jupiter'
+  }
+}
+//gradlew -q behaviour
