@@ -1,6 +1,29 @@
+import org.apache.commons.codec.binary.Base64
+
+//You can add dependencies in your build script and use classes from dependency in script
+// available also all sub-project in multi-project. Example: task encode
+buildscript {
+  repositories {
+    mavenCentral()
+  }
+  dependencies {
+    classpath group: 'commons-codec', name: 'commons-codec', version: '1.2'
+  }
+}
+
 plugins {
   id 'idea'
 }
+
+task encode {
+  doLast {
+    byte[] encodedString = new Base64().encode('hello world\n'.getBytes())
+    println new String(encodedString)
+  }
+}
+//gradlew -q encode
+//   Every project automatically has a buildEnvironment task
+//gradlew -q buildEnvironment
 
 task hello {
   doLast {
@@ -66,7 +89,6 @@ task printTaskProperties {
   }
 }
 //gradlew -q printTaskProperties
-
 
 //On the fly if task already executed then set variable
 //whenReady affects the task before it executed
