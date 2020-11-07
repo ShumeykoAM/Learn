@@ -1,12 +1,22 @@
 <context: component-scan> сообщает  Spring о необходимости сканирования кода, аннотированного с помощью
-@Component
+@Component  Говорит spring что аннотированный класс нужно внедрить в контекст бинов
+@Service    Тоже что и @Component, разница лишь логическая, @Service - говорит что данный класс является службой
 @Controller
 @Repository
-@Service
+
+@Order можно применять при внедрении в списки для сортировки бинов
 
 @Autowired - спринговая
 @Resource(name = ... JSR
-@Inject              JSR эквивалентна @Autowired
+@Inject              JSR, эквивалентна @Autowired
+
+@Qualifier работает вместе с @Autowired и @Inject для указания идентификатора конкретного внедряемого бина
+
+@Value(...) - жестко прописываем значение для внедрения (жестко - плохо), можно использовать SpEL
+
+@Configuration
+@Bean
+
 
 BeanFactory
 ApplicationContext
