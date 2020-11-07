@@ -1,7 +1,9 @@
 package com.spring.di;
 
+import com.spring.di.configuration.java.MessageRenderer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 /**
  * Приложение SpringBoot
@@ -13,6 +15,9 @@ public class DependencyInjectionApplication
 {
 	public static void main(String[] args)
 	{
-		SpringApplication.run(DependencyInjectionApplication.class, args);
+		ApplicationContext context = SpringApplication.run(DependencyInjectionApplication.class, args);
+
+		MessageRenderer renderer = context.getBean("messageRenderer", MessageRenderer.class);
+		renderer.render();
 	}
 }

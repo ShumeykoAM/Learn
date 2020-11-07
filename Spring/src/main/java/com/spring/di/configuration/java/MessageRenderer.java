@@ -1,4 +1,4 @@
-package com.spring.di;
+package com.spring.di.configuration.java;
 
 /**
  * Интерфейс бина

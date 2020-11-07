@@ -1,0 +1,17 @@
+<context: component-scan> сообщает  Spring о необходимости сканирования кода, аннотированного с помощью
+@Component
+@Controller
+@Repository
+@Service
+
+@Autowired - спринговая
+@Resource(name = ... JSR
+@Inject              JSR эквивалентна @Autowired
+
+BeanFactory
+ApplicationContext
+ContextLoaderListener
+BeanDefinition
+BeanDefinitionReader
+PropertiesBeanDefinitionReader
+XmlBeanDefinitionReader
