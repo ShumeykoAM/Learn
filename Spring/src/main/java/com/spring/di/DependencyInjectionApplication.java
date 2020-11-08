@@ -1,5 +1,7 @@
 package com.spring.di;
 
+import com.spring.di.configuration.events.CustomEvent;
+import com.spring.di.configuration.factory.MessageDigester;
 import com.spring.di.configuration.java.MessageRenderer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -19,5 +21,10 @@ public class DependencyInjectionApplication
 
 		MessageRenderer renderer = context.getBean("messageRenderer", MessageRenderer.class);
 		renderer.render();
+		MessageDigester digester = context.getBean("messageDigester", MessageDigester.class);
+		digester.digest("Hello World!");
+
+		//Регистрируем событие, вызовутся все обработчики
+		context.publishEvent(new CustomEvent("", "some message"));
 	}
 }
