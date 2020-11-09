@@ -32,7 +32,7 @@ public class StandardOutMessageRenderer implements MessageRenderer
 	private MessageProvider provider2;
 
 	@Inject
-	//@Qualifier("messageProvider")
+	@Qualifier("messageProvider")
 	private MessageProvider provider3;
 
 	private final MessageProvider provider4;
@@ -41,7 +41,7 @@ public class StandardOutMessageRenderer implements MessageRenderer
 	ContainCollections collections;
 
 	@Autowired
-	public StandardOutMessageRenderer(MessageProvider provider, @Value("string value") String stringField)
+	public StandardOutMessageRenderer(@Qualifier("messageProvider") MessageProvider provider, @Value("string value") String stringField)
 	{
 		this.provider4 = provider;
 		this.stringField = stringField;
@@ -55,6 +55,7 @@ public class StandardOutMessageRenderer implements MessageRenderer
 
 	@Override
 	@Autowired
+	@Qualifier("configurableMessageProvider")
 	public void setMessageProvider(MessageProvider provider)
 	{
 		this.provider = provider;

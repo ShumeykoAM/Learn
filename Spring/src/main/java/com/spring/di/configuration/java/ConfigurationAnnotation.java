@@ -1,7 +1,6 @@
 package com.spring.di.configuration.java;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import java.util.Properties;
 
@@ -10,7 +9,6 @@ import java.util.Properties;
  * @author Alexander Shumeyko
  * @ created 07.11.2020
  */
-@Configuration
 public class ConfigurationAnnotation
 {
 	@Bean("customIdProperties")

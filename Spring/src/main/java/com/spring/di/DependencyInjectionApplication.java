@@ -26,5 +26,11 @@ public class DependencyInjectionApplication
 
 		//Регистрируем событие, вызовутся все обработчики
 		context.publishEvent(new CustomEvent("", "some message"));
+
+		MessageRenderer renderer1 = context.getBean("configurableMessageRenderer", MessageRenderer.class);
+		renderer1.render();
+		renderer1 = context.getBean("configurableMessageRenderer", MessageRenderer.class);
+		renderer1.render();
+
 	}
 }

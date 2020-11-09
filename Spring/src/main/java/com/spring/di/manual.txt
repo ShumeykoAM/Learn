@@ -8,7 +8,9 @@
 
 @Autowired - спринговая
 @Resource(name = ... JSR
-@Inject              JSR, эквивалентна @Autowired
+    @Inject              JSR, эквивалентна @Autowired, ЛУЧШЕ НЕ ИСПОЛЬЗОВАТЬ
+    @Named - JSR - эквивалент @Component, @Service, а также совместно с @Inject задает имя бина
+    @Singleton - нв спринг не влияет
 
 @Qualifier работает вместе с @Autowired и @Inject для указания идентификатора конкретного внедряемого бина
 
@@ -17,9 +19,25 @@
 @Configuration
 @Bean
 
+@PostConstruct
+@PreDestroy
 
-BeanFactory
+FactoryBean
 ApplicationContext
+
+ События
+ApplicationListener
+ApplicationEvent
+
+ Жизненный цикл
+BeanNameAware
+BeanClassLoaderAware
+ApplicationContextAware
+InitializingBean
+DisposableBean
+
+
+
 ContextLoaderListener
 BeanDefinition
 BeanDefinitionReader
