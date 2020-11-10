@@ -2,9 +2,13 @@
 @Component  Говорит spring что аннотированный класс нужно внедрить в контекст бинов
 @Service    Тоже что и @Component, разница лишь логическая, @Service - говорит что данный класс является службой
 @Controller
+    @ControllerAdvice
+    @ResponseStatus
+    @ExceptionHandler
+
 @Repository
 
-@Order можно применять при внедрении в списки для сортировки бинов
+@Order можно применять при внедрении в списки для сортировки бинов, обработчиков исключений, ...
 
 @Autowired - спринговая
 @Resource(name = ... JSR
